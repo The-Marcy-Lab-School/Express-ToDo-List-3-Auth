@@ -1,0 +1,35 @@
+<%- include('./partials/header'); -%>
+
+<form class="signup" action="/signup" method="post">
+  <fieldset>
+    <legend>Sign Up</legend>
+    <h1>Sign Up</h1>
+    <p>It's free!</p>
+    <ul class="signup-inputs">
+
+      <li class="signup-input">
+        <label for="name">First Name</label>
+        <input type="text" name="first_name" id="name" placeholder="Ada" required>
+      </li>
+
+      <li class="signup-input">
+        <label for="last">Last Name</label>
+        <input type="text" name="last_name" id="last" placeholder="Lovelance">
+      </li>
+
+      <li class="signup-input">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="ada.love@mail.com" required>
+      </li>
+
+      <li class="signup-input">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+      </li>
+
+      <li>
+        <input type="submit" value="Sign Up">
+      </li>
+    </ul>
+  </fieldset>
+</form>
