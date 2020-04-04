@@ -18,3 +18,28 @@ The purpose of this Problem Set is to merge your work from Problem Set 7.1 and P
 
 ### Due Date
 Tuesday, April 7 at 9AM
+
+```sql
+CREATE TABLE tasks(
+id SERIAL PRIMARY KEY,
+user_id int REFERENCES users(id),
+task_name text ,
+task_description text ,
+due_date date ,
+is_complete boolean DEFAULT false NOT NULL
+) ;
+```
+
+
+```sql
+CREATE TABLE users(
+id SERIAL PRIMARY KEY,
+email text ,
+password text
+);
+```
+
+Users can register with an email and password.(password is also encrypted)
+Create:Make a post request to '/register'  with email and password to create your user.
+
+
