@@ -1,9 +1,9 @@
-const db = require('db.js');
+const db = require('../db.js');
 
 class Task {
-  static createTask(taskName, taskDescription, dueDate, isComplete = false) {
-    return db.query(`INSERT INTO tasks(task_name, task_description, due_date,is_complete)
-    VALUES($1,$2,$3,$4);`, [taskName, taskDescription, dueDate, isComplete]);
+  static createTask(userId,taskName, taskDescription, dueDate, isComplete = false) {
+    return db.query(`INSERT INTO tasks(user_id,task_name, task_description, due_date,is_complete)
+    VALUES($1,$2,$3,$4,$5);`, [userId,taskName, taskDescription, dueDate, isComplete]);
   }
 
   static getLastTask() {
@@ -29,6 +29,7 @@ class Task {
   static markComplete(id, isComplete) {
     return db.query('UPDATE tasks SET is_complete = false WHERE id = $1', [id, isComplete]);
   }
+  
 }
 
 module.exports = Task;

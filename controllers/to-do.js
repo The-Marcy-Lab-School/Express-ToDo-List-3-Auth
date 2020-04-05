@@ -21,9 +21,9 @@ const getTaskById = (req,res) =>{
 
 const createTask = (req, res) => {
   const {
-    taskName, taskDescription, dueDate, isComplete,
+    userId,taskName, taskDescription, dueDate, isComplete,
   } = req.body;
-  Task.createTask(taskName, taskDescription, dueDate, isComplete)
+  Task.createTask(userId,taskName, taskDescription, dueDate, isComplete)
     .then(() => Task.getLastTask())
     .then((data) => res.status(201).json(data.rows[0]))
     .catch((err) => {

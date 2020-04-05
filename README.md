@@ -39,6 +39,13 @@ password text
 );
 ```
 
+```
+SELECT users.username , tasks.task_name, tasks.task_description , tasks.due_date , tasks.is_complete  
+FROM users JOIN tasks 
+ON users.id = tasks.user_id 
+;
+```
+
 Users can register with an email and password.(password is also encrypted)
 Create:Make a post request to '/register'  with email and password to create your user.
 

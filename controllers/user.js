@@ -2,11 +2,11 @@ const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
 const authorize = async(req,res) => {
-  const { email, password } = req.body;
+  const { email, password,username } = req.body;
   
   const encrypted = await User.encrypt(password);
   console.log(encrypted);
-  User.add(email,encrypted)
+  User.add(email,encrypted,username)
     .then((data)=> res.status(201).send('User created'))
     .catch((err)=>{
       console.log(err);

@@ -17,8 +17,31 @@ app.use(cookieParser());
 // app.use(userController.authenticate);
 
 
+app.set('view engine','ejs');
+
+app.get('/register', (req,res)=>{
+  res.render('register');
+});
 
 app.post('/register', userController.authorize);
+
+app.get('/', (req,res)=>{
+  res.render('index');
+});
+
+app.post('/',userController.authenticate);
+
+app.get('/task', taskController.getAll);
+
+app.get('/task/:id', taskController.getTaskById);
+
+app.post('/task', taskController.createTask);
+
+app.put('/task/:id', taskController.updateTask);
+
+app.delete('/task/:id', taskController.deleteTask);
+
+
 
 
 
