@@ -10,6 +10,11 @@ class User {
     const queryText = 'SELECT * FROM users WHERE id = $1;';
     return db.query(queryText, [userId]);
   }
+
+  static getLastCreatedUser() {
+    const queryText = 'SELECT * FROM users ORDER BY id DESC LIMIT 1;';
+    return db.query(queryText);
+  }
 }
 
 module.exports = User;
