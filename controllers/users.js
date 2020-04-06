@@ -31,7 +31,6 @@ const verifyUser = async(req, res, next) => {
 
   try {
     const user = await User.getUserByEmail(email);
-    console.log("User: ", user)
     if (!user) {
       return res.status(403).send('Unauthorized User: User does not exist.');
     }
