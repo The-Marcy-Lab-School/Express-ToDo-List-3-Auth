@@ -6,8 +6,10 @@ const createTask = async(req, res) => {
   try {
     const { userEmail, name, description, dueDate } = req.body;
     console.log(userEmail);
-    await Todo.createTask(userEmail, name, description, dueDate);
+    const test = await Todo.createTask(userEmail, name, description, dueDate);
+    console.log(test);
     const data = await Todo.getLastCreated();
+    console.log(data);
     return res.status(201).json(data.rows);
   }
   catch (err) {
