@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const todoRoute = require('./routes/taskRoute');
+const userController = require('./controllers/users');
 
 
 const app = express();
@@ -14,8 +15,12 @@ app.use(express.static(__dirname + '/public'));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-  res.send('Helloooo');
+    res.send('Helloooo');
 });
+
+app.post('/register', userController.createUser);
+
+app.use(userController.verifyUser);
 
 app.use(todoRoute);
 
