@@ -1,0 +1,44 @@
+<%- include('./partials/header') %>
+
+<header>
+    <h1 class="header">Todo List</h1>
+    <a id="link" href="/add">Add a Task</a>
+</header>
+
+<% if(Object.keys(list).length === 0) { %>
+  <h1 class="header">Looks empty. Add a task!</h1>
+  <% } %>
+  <table class="list">
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Due Date</th>
+        <th>Completed</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% for(let task in list) { %>
+      <tr>
+        <td><%=list[task].title %></td>
+        <td><%=list[task].dueDate %></td>
+        <td><% if (list[task].isComplete === false) { %> No <% } else { %> Yes <% } %></td>
+        <td class="buttons">
+          <form class="form" method='post' action="/delete/<%=task %>">
+            <input type='submit' value='Delete'>
+          </form>
+        </td>
+        <td class="buttons">
+          <form class="form" method='post' action="/complete/<%=task %>">
+            <input type='submit' value='Complete'>
+          </form>
+        </td>
+        <td class="buttons">
+          <form class="form" method='get' action="/update/<%= task %>">
+            <input type='submit' value='Update'>
+          </form>
+        </td>
+      </tr>
+    <% } %>
+    </tbody>
+  </table>
+</html>

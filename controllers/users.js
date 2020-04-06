@@ -10,10 +10,10 @@ const createUser = (req, res) => {
     .then((hashedPassword) => {
       console.log('Hashed Password: ', hashedPassword);
       User.createUser(name, email, hashedPassword);
-      const token = jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
+        res.json(`Token: ${encryptedPayload}`);
       });
-      res.send(`Token: ${token}`);
     })
     .catch((err) => {
       console.log(err);

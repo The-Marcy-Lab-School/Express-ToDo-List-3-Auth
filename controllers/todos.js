@@ -1,4 +1,5 @@
 const Todo = require('../models/Todo');
+const userController = require('../controllers/users');
 
 const createTask = (req, res) => {
   const { user } = req.params;
@@ -12,6 +13,7 @@ const createTask = (req, res) => {
 const getAllTasksByUserId = async(req, res) => {
   const { user } = req.params;
   try {
+    await userController.verifyUser;
     const data = await Todo.getAllTasksByUserId(user);
     return data.json(data.rows);
   }
