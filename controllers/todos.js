@@ -1,11 +1,13 @@
 const Todo = require('../models/Todo');
 const userController = require('../controllers/users');
+const jwt = require('jsonwebtoken');
 
 const createTask = async(req, res) => {
   try {
-    const payload = await userController.verifyUser;
     const { name, description, dueDate } = req.body;
-    await Todo.createTask(payload.userId, name, description, dueDate);
+    const payload = await jwt.verify(req.cookies.userToken, 'Do Not Open');
+    const { email } = payload;
+    await Todo.createTask(email, name, description, dueDate);
     const data = await Todo.getLastCreated();
     return res.status(201).json(data.rows);
   }
@@ -18,6 +20,9 @@ const getAllTasksByUserEmail = async(req, res) => {
   try {
     const data = await Todo.getLastCreatedUser();
     const result = await Todo.getAllTasksByUserEmail(data.rows[0].id);
+    if (!result) {
+      res.send('Task list is empty. Add a new task.');
+    }
     console.log(result.json(result.rows));
     return result.json(result.rows);
   }
