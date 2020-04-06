@@ -16,6 +16,11 @@ class Todo {
     return db.query(queryText);
   }
 
+  static getLastCreatedUser() {
+    const queryText = 'SELECT * FROM users ORDER BY id DESC LIMIT 1;';
+    return db.query(queryText);
+  }
+
   static updateTask(taskId, userId, name, description, dueDate) {
     const queryText = 'UPDATE tasks SET name = $3, description = $4, due_date = $5 WHERE id = $1 AND user_id = $2;';
     return db.query(queryText, [taskId, userId, name, description, dueDate]);

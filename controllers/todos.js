@@ -11,11 +11,11 @@ const createTask = (req, res) => {
 };
 
 const getAllTasksByUserId = async(req, res) => {
-  const { user } = req.params;
   try {
-    await userController.verifyUser;
-    const data = await Todo.getAllTasksByUserId(user);
-    return data.json(data.rows);
+    const data = await Todo.getLastCreatedUser();
+    const result = await Todo.getAllTasksByUserId(data.rows[0].id);
+    console.log(result.json(result.rows));
+    return result.json(result.rows);
   }
   catch (err) {
     console.log(err);
