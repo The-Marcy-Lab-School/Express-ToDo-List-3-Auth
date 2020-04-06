@@ -18,6 +18,8 @@ app.get('/', (req, res) => {
     res.send('Helloooo');
 });
 
+app.get('/register', userController.getRegisterPage);
+
 app.post('/register', userController.createUser);
 
 // app.post('/login', userController.login);

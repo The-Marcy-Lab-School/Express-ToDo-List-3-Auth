@@ -26,14 +26,17 @@ const verifyUser = async(req, res, next) => {
     return res.status(401).send('Only logged in users can access this page.');
   }
   const payload = jwt.verify(req.cookies.userToken, 'Do Not Open');
+  console.log("Payload: ", payload);
   const { email, password } = payload;
 
   try {
     const user = await User.getUserByEmail(email);
-
+    console.log("User: ", user)
     if (!user) {
       return res.status(403).send('Unauthorized User: User does not exist.');
     }
+    console.log("User: ", user)
+
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
@@ -49,7 +52,12 @@ const verifyUser = async(req, res, next) => {
   }
 };
 
+const getRegisterPage = (req, res) => {
+  res.render('register');
+};
+
 module.exports = {
   createUser,
   verifyUser,
+  getRegisterPage,
 };
