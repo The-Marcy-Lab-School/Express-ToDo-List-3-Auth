@@ -50,10 +50,15 @@ const isCompleted = (req, res) => {
     .catch(() => res.status(500).json({ error: 'Internal Server Error: Could not set task as completed.' }));
 };
 
+const getCreateTask = (req, res) => {
+  res.render('createTask');
+};
+
 module.exports = {
   createTask,
   getAllTasksByUserEmail,
   updateTask,
   deleteTask,
   isCompleted,
+  getCreateTask,
 };
