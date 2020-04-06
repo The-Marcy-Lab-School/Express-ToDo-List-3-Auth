@@ -14,10 +14,10 @@ const createTask = async(req, res) => {
   }
 };
 
-const getAllTasksByUserId = async(req, res) => {
+const getAllTasksByUserEmail = async(req, res) => {
   try {
     const data = await Todo.getLastCreatedUser();
-    const result = await Todo.getAllTasksByUserId(data.rows[0].id);
+    const result = await Todo.getAllTasksByUserEmail(data.rows[0].id);
     console.log(result.json(result.rows));
     return result.json(result.rows);
   }
@@ -52,7 +52,7 @@ const isCompleted = (req, res) => {
 
 module.exports = {
   createTask,
-  getAllTasksByUserId,
+  getAllTasksByUserEmail,
   updateTask,
   deleteTask,
   isCompleted,
