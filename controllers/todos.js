@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const createTask = async(req, res) => {
   try {
     const { userEmail, name, description, dueDate } = req.body;
+    console.log(userEmail);
     await Todo.createTask(userEmail, name, description, dueDate);
     const data = await Todo.getLastCreated();
     return res.status(201).json(data.rows);

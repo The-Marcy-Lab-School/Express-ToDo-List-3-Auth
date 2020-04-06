@@ -26,7 +26,6 @@ const verifyUser = async(req, res, next) => {
     return res.status(401).send('Only logged in users can access this page.');
   }
   const payload = jwt.verify(req.cookies.userToken, 'Do Not Open');
-  console.log("Payload: ", payload);
   const { email, password } = payload;
   req.body.userEmail = email;
   req.body.userPassword = password;
