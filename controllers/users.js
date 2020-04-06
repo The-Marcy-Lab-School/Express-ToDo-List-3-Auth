@@ -1,23 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const Task = require('../models/Todo');
-
-const register = (req, res) => {
-  res.render('register');
-};
-
-const login = (req, res) => {
-  res.render('login');
-};
-
-const getUserList = (req, res) => {
-  const { user } = req.params;
-  console.log(user);
-  Task.getAllTasksByUserId(user)
-    .then((data) => res.render('home', { list: data.rows }))
-    .catch((err) => console.log('didnt render'));
-};
 
 const createUser = (req, res) => {
   const { name, email, password } = req.body;
@@ -27,12 +10,11 @@ const createUser = (req, res) => {
     .then((hashedPassword) => {
       console.log('Hashed Password: ', hashedPassword);
       User.createUser(name, email, hashedPassword);
-      jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      const token = jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
       });
+      res.send(`Token: ${token}`);
     })
-    .then(() => User.getLastCreatedUser())
-    .then((data) => res.redirect(`/home/${data.rows[0].id}`))
     .catch((err) => {
       console.log(err);
       res.send(err);
@@ -68,9 +50,6 @@ const verifyUser = async(req, res, next) => {
 };
 
 module.exports = {
-  register,
-  login,
-  getUserList,
   createUser,
   verifyUser,
 };

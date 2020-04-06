@@ -4,7 +4,8 @@
   "description": "Full-stack Todo List app.",
   "main": "app.js",
   "scripts": {
-    "test": "jest"
+    "test": "jest",
+    "start": "node app.js"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,11 @@
 const express = require('express');
 const taskController = require('../controllers/todos');
+const userController = require('../controllers/users');
 const router = express.Router();
+
+router.get('/register', userController.register);
+
+router.post('/register', userController.createUser);
 
 router.get('/tasks/:user', taskController.getAllTasksByUserId);
 

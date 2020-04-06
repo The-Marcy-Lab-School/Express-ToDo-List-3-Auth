@@ -9,14 +9,16 @@ const createTask = (req, res) => {
     .catch(() => res.status(500).json({ error: 'Internal Server Error: Could not create task. Please try again.' }));
 };
 
-const getAllTasksByUserId = (req, res) => {
+const getAllTasksByUserId = async(req, res) => {
   const { user } = req.params;
-  Todo.getAllTasksByUserId(user)
-    .then((data) => res.json(data.rows))
-    .catch((err) => {
-      console.log(err);
-      res.status(500).json({ error: 'Internal Server Error: Could not get all tasks from the user.' });
-    });
+  try {
+    const data = await Todo.getAllTasksByUserId(user);
+    return data.json(data.rows);
+  }
+  catch (err) {
+    console.log(err);
+    res.status(500).json({ error: 'Internal Server Error: Could not get all tasks from the user.' });
+  }
 };
 
 const updateTask = (req, res) => {
