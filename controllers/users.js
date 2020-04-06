@@ -28,7 +28,8 @@ const verifyUser = async(req, res, next) => {
   const payload = jwt.verify(req.cookies.userToken, 'Do Not Open');
   console.log("Payload: ", payload);
   const { email, password } = payload;
-
+  req.body.userEmail = email;
+  req.body.userPassword = password;
   try {
     const user = await User.getUserByEmail(email);
     if (!user) {
