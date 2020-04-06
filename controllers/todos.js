@@ -23,7 +23,7 @@ const getAllTasksByUserEmail = async(req, res) => {
     if (!result) {
       res.send('Task list is empty. Add a new task.');
     }
-    console.log(result.json(result.rows));
+    console.log(res.json(result.rows));
     return result.json(result.rows);
   }
   catch (err) {
