@@ -2,23 +2,24 @@ const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
 
-const createUser = (req, res) => {
+const createUser = async(req, res) => {
   const { name, email, password } = req.body;
-
   const saltRounds = 8;
-  bcrypt.hash(password, saltRounds)
-    .then((hashedPassword) => {
-      console.log('Hashed Password: ', hashedPassword);
-      User.createUser(name, email, hashedPassword);
-      jwt.sign({ name, email, password }, 'Do Not Open', (err, encryptedPayload) => {
-        res.cookie('userToken', encryptedPayload, { httpOnly: true });
-        res.status(201).json(`Token: ${encryptedPayload}`);
-      });
-    })
-    .catch((err) => {
-      console.log(err);
-      res.send(err);
+  try {
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    console.log('Hashed Password: ', hashedPassword);
+
+    await User.createUser(name, email, hashedPassword);
+    const token = jwt.sign({ name, email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      res.cookie('userToken', encryptedPayload, { httpOnly: true });
+      res.status(201).send('Account created');
     });
+    return token;
+  }
+  catch (err) {
+    console.log(err);
+    res.send(err);
+  }
 };
 
 const verifyUser = async(req, res, next) => {
@@ -38,7 +39,7 @@ const verifyUser = async(req, res, next) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (isValidPassword) {
-      return next();
+      return payload;
     }
 
     return res.status(403).send('Password is incorrect. Please try again.');

@@ -1,13 +1,17 @@
 const Todo = require('../models/Todo');
 const userController = require('../controllers/users');
 
-const createTask = (req, res) => {
-  const { user } = req.params;
-  const { name, description, dueDate } = req.body;
-  Todo.createTask(user, name, description, dueDate)
-    .then(() => Todo.getLastCreated())
-    .then((data) => res.status(201).json(data.rows))
-    .catch(() => res.status(500).json({ error: 'Internal Server Error: Could not create task. Please try again.' }));
+const createTask = async(req, res) => {
+  try {
+    const payload = await userController.verifyUser;
+    const { name, description, dueDate } = req.body;
+    await Todo.createTask(payload.userId, name, description, dueDate);
+    const data = await Todo.getLastCreated();
+    return res.status(201).json(data.rows);
+  }
+  catch (err) {
+    res.status(500).json({ error: 'Internal Server Error: Could not create task. Please try again.' });
+  }
 };
 
 const getAllTasksByUserId = async(req, res) => {

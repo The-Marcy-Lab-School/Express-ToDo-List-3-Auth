@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/home', taskController.getAllTasksByUserId);
 
-router.post('/newTask/:user', taskController.createTask);
+router.post('/newTask', taskController.createTask);
 
 router.put('/updateTask/:user/:task', taskController.updateTask);
 
