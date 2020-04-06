@@ -12,7 +12,7 @@ const createUser = (req, res) => {
       User.createUser(name, email, hashedPassword);
       jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
-        res.status(201).send('Account created.');
+        res.status(201).redirect('/home');
       });
     })
     .catch((err) => {
@@ -26,10 +26,10 @@ const verifyUser = async(req, res, next) => {
     return res.status(401).send('Only logged in users can access this page.');
   }
   const payload = jwt.verify(req.cookies.userToken, 'Do Not Open');
-  const { userId, password } = payload;
+  const { email, password } = payload;
 
   try {
-    const user = await User.getUserById(userId);
+    const user = await User.getUserByEmail(email);
 
     if (!user) {
       return res.status(403).send('Unauthorized User: User does not exist.');

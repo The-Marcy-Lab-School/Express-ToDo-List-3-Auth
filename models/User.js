@@ -6,9 +6,9 @@ class User {
     return db.query(queryText, [name, email, password]);
   }
 
-  static getUserById(userId) {
-    const queryText = 'SELECT * FROM users WHERE id = $1;';
-    return db.query(queryText, [userId]);
+  static getUserByEmail(email) {
+    const queryText = 'SELECT * FROM users WHERE email = $1;';
+    return db.query(queryText, [email]);
   }
 
   static getLastCreatedUser() {
