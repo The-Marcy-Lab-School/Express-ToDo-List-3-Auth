@@ -39,7 +39,7 @@ const verifyUser = async(req, res, next) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (isValidPassword) {
-      return payload;
+      return next();
     }
 
     return res.status(403).send('Password is incorrect. Please try again.');

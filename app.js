@@ -20,7 +20,9 @@ app.get('/', (req, res) => {
 
 app.post('/register', userController.createUser);
 
-app.post('/login', userController.login);
+// app.post('/login', userController.login);
+
+app.use(userController.verifyUser);
 
 app.use(todoRoute);
 
