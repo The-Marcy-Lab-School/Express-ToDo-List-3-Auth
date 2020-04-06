@@ -25,7 +25,7 @@ const verifyUser = async(req, res, next) => {
   if (!req.cookies.userToken) {
     return res.status(401).send('Only logged in users can access this page.');
   }
-  const payload = jwt.verify(req.cookies.friendTrackerToken, 'Do Not Open');
+  const payload = jwt.verify(req.cookies.userToken, 'Do Not Open');
   const { userId, password } = payload;
 
   try {
