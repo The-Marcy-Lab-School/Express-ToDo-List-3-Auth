@@ -34,7 +34,7 @@ const verifyUser = async(req, res, next) => {
     if (!user) {
       return res.status(403).send('Unauthorized User: User does not exist.');
     }
-    console.log("User: ", user)
+    console.log("User Password: ", user.password)
 
 
     const isValidPassword = await bcrypt.compare(password, user.password);
