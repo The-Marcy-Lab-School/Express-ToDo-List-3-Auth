@@ -12,7 +12,7 @@ const createUser = (req, res) => {
       User.createUser(name, email, hashedPassword);
       jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
-        res.status(201).redirect('/home');
+        res.status(201).send('All done');
       });
     })
     .catch((err) => {

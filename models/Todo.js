@@ -1,14 +1,14 @@
 const db = require('../db');
 
 class Todo {
-  static createTask(userId, name, description, dueDate) {
-    const queryText = 'INSERT INTO tasks (user_id, name, description, due_date) VALUES ($1, $2, $3, $4);';
-    return db.query(queryText, [userId, name, description, dueDate]);
+  static createTask(userEmail, name, description, dueDate) {
+    const queryText = 'INSERT INTO tasks (name, description, due_date) VALUES ($1, $2, $3) WHERE user_email = $4;';
+    return db.query(queryText, [name, description, dueDate, userEmail]);
   }
 
-  static getAllTasksByUserId(userId) {
-    const queryText = 'SELECT * FROM tasks WHERE user_id = $1;';
-    return db.query(queryText, [userId]);
+  static getAllTasksByUserEmail(userEmail) {
+    const queryText = 'SELECT * FROM tasks WHERE user_email = $1;';
+    return db.query(queryText, [userEmail]);
   }
 
   static getLastCreated() {
@@ -21,23 +21,23 @@ class Todo {
     return db.query(queryText);
   }
 
-  static updateTask(taskId, userId, name, description, dueDate) {
-    const queryText = 'UPDATE tasks SET name = $3, description = $4, due_date = $5 WHERE id = $1 AND user_id = $2;';
-    return db.query(queryText, [taskId, userId, name, description, dueDate]);
+  static updateTask(taskId, userEmail, name, description, dueDate) {
+    const queryText = 'UPDATE tasks SET name = $3, description = $4, due_date = $5 WHERE id = $1 AND user_email = $2;';
+    return db.query(queryText, [taskId, userEmail, name, description, dueDate]);
   }
 
-  static deleteTask(taskId, userId) {
-    const queryText = 'DELETE FROM tasks WHERE id = $1 AND user_id = $2;';
-    return db.query(queryText, [taskId, userId]);
+  static deleteTask(taskId, userEmail) {
+    const queryText = 'DELETE FROM tasks WHERE id = $1 AND user_email = $2;';
+    return db.query(queryText, [taskId, userEmail]);
   }
 
-  static isCompleted(taskId, userId, completed) {
+  static isCompleted(taskId, userEmail, completed) {
     if (completed === 't') {
-      const queryText = 'UPDATE tasks SET completed = false WHERE id = $1 AND user_id = $2;';
-      return db.query(queryText, [taskId, userId]);
+      const queryText = 'UPDATE tasks SET completed = false WHERE id = $1 AND user_email = $2;';
+      return db.query(queryText, [taskId, userEmail]);
     }
-    const queryText = 'UPDATE tasks SET completed = true WHERE id = $1 AND user_id = $2;';
-    return db.query(queryText, [taskId, userId]);
+    const queryText = 'UPDATE tasks SET completed = true WHERE id = $1 AND user_email = $2;';
+    return db.query(queryText, [taskId, userEmail]);
   }
 }
 
