@@ -18,7 +18,7 @@ window.addEventListener('load', (event) => {
                         <button class="button">Delete</button>
                         <button class="button button-clear">Update</button>
             `
-                complete.appendChild(taskElement)
+                incomplete.appendChild(taskElement)
             }
             
             if(task.is_complete === true){
@@ -33,9 +33,10 @@ window.addEventListener('load', (event) => {
                         <button class="button">Delete</button>
                         <button class="button button-clear">Update</button>
             `
-                incomplete.appendChild(taskElement)
+                complete.appendChild(taskElement)
             }
             
         }
     })
 })
+
