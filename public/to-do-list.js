@@ -48,8 +48,7 @@ const completeTask = (taskId) => {
 }
 
 const updateTask = (taskId) => {
-    document.getElementsById("updateForm").setAttribute("action", `/update-task/${taskId}`)
-    location = '/update-task-page'
+    fetch(`/update-task/${taskId}`, {method:'put'})
     
 }
 
