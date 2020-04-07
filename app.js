@@ -15,6 +15,11 @@ app.set('view engine', 'ejs')
 app.use(cookieParser())
 app.use(listRouter)
 
+app.get('/update-task/:id', (req, res) =>{
+    const id = req.params
+    res.render('update-task.ejs', { taskId: id })
+})
+
 
 
 app.listen(port, () => {
