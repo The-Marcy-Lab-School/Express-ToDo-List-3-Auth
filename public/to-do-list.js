@@ -49,7 +49,7 @@ const completeTask = (taskId) => {
 
 const updateTask = (taskId) => {
     document.getElementById("updateForm").action = `/update-task/${taskId}`
-    console.log('big')
+    location ='/to-do-list'
 }
 
 
