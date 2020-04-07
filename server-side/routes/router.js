@@ -43,7 +43,7 @@ router.get('/add-task-page', (req, res) =>{
 
 router.get('/update-task/:id', (req, res) =>{
     const id = req.params
-    res.render('update-task.ejs', {taskId: id})
+    res.render('../../public/views/update-task.ejs', {taskId: id})
 })
 
 
