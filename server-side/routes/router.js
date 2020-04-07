@@ -8,7 +8,6 @@ const authenticate = require('../auth/verify')
 const path = require('path')
 
 //API paths
-router.get('/', listController.greetUser)
 router.get('/login', userController.login)
 router.post('/register', userController.register)
 router.get('/incomplete-tasks', authenticate, listController.getAllIncompletedTasks)
@@ -20,7 +19,7 @@ router.put('/update-task/:id', authenticate, toDoList.updateTask)
 router.put('/complete-task/:id', authenticate, toDoList.completeTask)
 
 //Client side paths
-router.get('/home-page', (req, res) =>{
+router.get('/', (req, res) =>{
     res.sendFile(path.join(__dirname ,'../../public/views' , 'index.html'));
 })
 

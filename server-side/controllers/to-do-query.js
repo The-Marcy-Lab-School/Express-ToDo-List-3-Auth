@@ -1,9 +1,5 @@
 const pool = require('../../db')
 
-const greetUser = (req, res) => {
-    res.send('To Do List API')
-}
-
 async function getAllIncompletedTasks(req, res) {
   try {
     const user_id = req.userId
@@ -55,7 +51,6 @@ async function getAllTasks(req, res) {
 
 
 module.exports = {
-    greetUser,
     getAllTasks,
     getAllCompletedTasks,
     getAllIncompletedTasks,
