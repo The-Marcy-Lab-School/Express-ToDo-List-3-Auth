@@ -6,6 +6,8 @@ const router = express.Router()
 const pool = require('../../db')
 const authenticate = require('../auth/verify') 
 const path = require('path')
+const app = express()
+app.set('view engine', 'ejs')
 
 //API paths
 router.get('/login', userController.login)
