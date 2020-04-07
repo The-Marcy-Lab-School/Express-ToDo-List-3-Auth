@@ -38,11 +38,11 @@ window.addEventListener('load', (event) => {
 })
 
 const deleteTask = (taskId) => {
-    fetch(`/delete-task/${taskId}`,{method:'post'})
+    fetch(`/delete-task/${taskId}`, {method:'put'})
 } 
 
 const completeTask = (taskId) => {
-    fetch(`/complete-task/${taskId}`,{method:'post'})
+    fetch(`/complete-task/${taskId}`, {method:'put'})
 }
 
 
