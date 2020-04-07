@@ -18,15 +18,21 @@ app.get('/', (req, res) => {
     res.send('Helloooo');
 });
 
-app.get('/register', userController.getRegisterPage);
+//Routes for user controllers - signing in, registering
 
 app.post('/register', userController.createUser);
 
-app.get('/login', userController.getLoginPage);
-
 app.post('/login', userController.verifyUser);
 
-app.use(userController.verifyUser);
+app.use(userController.authenticate);
+
+//Routes for loading views
+app.get('/userRegister', userController.getRegisterPage);
+
+app.get('/userLogin', userController.getLoginPage);
+
+app.get('/home', userController.loadHomePage);
+
 
 app.use(todoRoute);
 

@@ -6,11 +6,9 @@ const path = require('path');
 const createTask = async(req, res) => {
   try {
     const { userId, name, description, dueDate } = req.body;
-    console.log(userId);
+    console.log(userId, name, description, dueDate);
     await Todo.createTask(userId, name, description, dueDate);
-    const data = await Todo.getLastCreated();
-    console.log(data);
-    return res.status(201).json(data.rows);
+    res.redirect('/home');
   }
   catch (err) {
     console.log(err);
@@ -21,12 +19,13 @@ const createTask = async(req, res) => {
 const getTasks = async(req, res) => {
   try {
     const { userId } = req.body;
+    console.log(`User Id: ${userId}`);
     const result = await Todo.getTasksByUserId(userId);
     if (result.length === 0) {
-      res.json({ message: 'Task list is empty. Add a new task.' });
+      res.json('There are no tasks yet.');
     }
-    console.log(res.json(result));
-    return res.json(result);
+    console.log(result);
+    res.json(result);
   }
   catch (err) {
     console.log(err);
@@ -34,12 +33,16 @@ const getTasks = async(req, res) => {
   }
 };
 
-const updateTask = (req, res) => {
+const updateTask = async(req, res) => {
   const { task } = req.params;
   const { userId, name, description, dueDate } = req.body;
-  Todo.updateTask(task, userId, name, description, dueDate)
-    .then(() => res.status(200).json({ message: 'Task successfully updated.' }))
-    .catch(() => res.status(500).json({ error: 'Internal Server Error: Task could not be updated.' }));
+  try {
+    const data = await Todo.updateTask(task, userId, name, description, dueDate);
+    return res.status(200).json(data.rows);
+  }
+  catch (err) {
+    res.status(500).json({ error: 'Internal Server Error: Task could not be updated.' });
+  }
 };
 
 const deleteTask = (req, res) => {
@@ -65,6 +68,7 @@ const getCreateTask = (req, res) => {
 const getUpdateTask = (req, res) => {
   res.sendFile(path.join(__dirname, '../views', 'updateTask.html'));
 };
+
 
 module.exports = {
   createTask,

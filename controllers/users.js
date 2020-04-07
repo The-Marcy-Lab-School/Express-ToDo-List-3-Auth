@@ -1,6 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
+const path = require('path');
 
 const createUser = (req, res) => {
   const { name, email, password } = req.body;
@@ -10,7 +11,7 @@ const createUser = (req, res) => {
     .then((hashedPassword) => {
       console.log('Hashed Password: ', hashedPassword);
       User.createUser(name, email, hashedPassword);
-      jwt.sign({ email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      return jwt.sign({ name, email, password }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
         res.redirect('/home');
       });
@@ -21,7 +22,7 @@ const createUser = (req, res) => {
     });
 };
 
-const verifyUser = async(req, res, next) => {
+const authenticate = async(req, res, next) => {
   if (!req.cookies.userToken) {
     return res.status(401).send('Only logged in users can access this page.');
   }
@@ -29,14 +30,14 @@ const verifyUser = async(req, res, next) => {
   const { email, password } = payload;
   try {
     const user = await User.getUserByEmail(email);
-    if (!user) {
-      return res.status(403).send('Unauthorized User: User does not exist.');
-    }
+
     req.body.userEmail = user.email;
     req.body.userPassword = user.password;
     req.body.userId = user.id;
-    console.log("User Password: ", user.password);
 
+    if (!user) {
+      return res.status(403).send('Unauthorized User: User does not exist.');
+    }
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
@@ -44,7 +45,35 @@ const verifyUser = async(req, res, next) => {
       return next();
     }
 
-    return res.status(403).send('Unauthorized User: Password is incorrect.');
+    return res.status(403).send('Unauthorized User: Try logging in again.');
+  }
+  catch (err) {
+    console.log(err);
+    return res.send(err);
+  }
+};
+
+const verifyUser = async(req, res, next) => {
+  const { email, password } = req.body;
+  try {
+    const user = await User.getUserByEmail(email);
+    if (!user) {
+      return res.status(403).send('User does not exist.');
+    }
+    req.body.userEmail = user.email;
+    req.body.userPassword = user.password;
+    req.body.userId = user.id;
+
+    const isValidPassword = await bcrypt.compare(password, user.password);
+
+    if (isValidPassword) {
+      return jwt.sign({ userId: user.id, email, password }, 'Do Not Open', (err, encryptedPayload) => {
+        res.cookie('userToken', encryptedPayload, { httpOnly: true });
+        res.redirect('/home');
+      });
+    }
+
+    return res.status(403).send('Email or password is incorrect.');
   }
   catch (err) {
     console.log(err);
@@ -53,18 +82,22 @@ const verifyUser = async(req, res, next) => {
 };
 
 const getRegisterPage = (req, res) => {
-  res.sendFile('../views/register.html');
+  res.sendFile(path.join(__dirname, '../views', 'register.html'));
 };
 
 const getLoginPage = (req, res) => {
-  res.sendFile('../views/login.html');
+  res.sendFile(path.join(__dirname, '../views', 'login.html'));
 };
 
-
+const loadHomePage = (req, res) => {
+  res.sendFile(path.join(__dirname, '../views', 'home.html'));
+};
 
 module.exports = {
   createUser,
+  authenticate,
   verifyUser,
   getRegisterPage,
   getLoginPage,
+  loadHomePage,
 };
