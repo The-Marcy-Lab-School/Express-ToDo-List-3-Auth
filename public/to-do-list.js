@@ -48,7 +48,7 @@ const completeTask = (taskId) => {
 }
 
 const updateTask = (taskId) => {
-    document.getElementsById("updateForm").setAttribute("action", `/update-task/${taskId}`)
+    document.getElementById("updateForm").action = `/update-task/${taskId}`
 }
 
 
