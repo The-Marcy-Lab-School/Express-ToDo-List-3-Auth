@@ -54,12 +54,15 @@ const verifyUser = async(req, res, next) => {
 };
 
 const getRegisterPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../', '../views', 'register.html'));
+  res.sendFile(path.join('../views', 'register.html'));
 };
 
 const getLoginPage = (req, res) => {
-  res.sendFile(path.join(__dirname, '../', '../views', 'login.html'));
+  res.sendFile(path.join('../views', 'login.html'));
 };
+
+// console.log(path.join('../views', 'login.html'));
+
 
 module.exports = {
   createUser,
