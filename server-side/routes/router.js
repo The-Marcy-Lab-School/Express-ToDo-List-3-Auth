@@ -6,8 +6,6 @@ const router = express.Router()
 const pool = require('../../db')
 const authenticate = require('../auth/verify') 
 const path = require('path')
-const app = express()
-app.set('view engine', 'ejs')
 
 //API paths
 router.get('/login', userController.login)
@@ -43,7 +41,7 @@ router.get('/add-task-page', (req, res) =>{
 
 router.get('/update-task/:id', (req, res) =>{
     const id = req.params
-    res.render('../../public/views/update-task.ejs', {taskId: id})
+    res.render('update-task.ejs', {taskId: id})
 })
 
 
