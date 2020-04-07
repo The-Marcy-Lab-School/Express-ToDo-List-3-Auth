@@ -16,7 +16,7 @@ window.addEventListener('load', (event) => {
                         <p class="dateAdded">Added: ${task.date_added}</p>
                         <button onclick="completeTask(${task.task_id})" class="button button-outline complete-button">Complete</button>
                         <button onclick="deleteTask(${task.task_id})" class="button delete-button">Delete</button>
-                        <a class="button button-clear update-button" href="/update-task-page">Update</a>
+                        <button onclick="updateTask(${task.task_id})"><a class="button button-clear update-button" href="/update-task-page">Update</a></button>
             `
                 incomplete.appendChild(taskElement)
             }
@@ -45,6 +45,10 @@ const deleteTask = (taskId) => {
 const completeTask = (taskId) => {
     fetch(`/complete-task/${taskId}`, {method:'put'})
     location.reload()
+}
+
+const updateTask = (taskId) => {
+    document.getElementsById("updateForm").setAttribute("action", `/update-task/${taskId}`)
 }
 
 
