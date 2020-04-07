@@ -28,7 +28,7 @@ window.addEventListener('load', (event) => {
                         <h3 class="name">${task.name}</h3>
                         <p class="description">${task.description}</p>
                         <p class="dateAdded">Added: ${task.date_added}</p>
-                        <p class="dateCompleted">${task.date_complete}</p>
+                        <p class="dateCompleted">Completed: ${task.date_complete}</p>
                         <button onclick="deleteTask(${task.task_id})" class="button delete-button">Delete</button>
             `
                 complete.appendChild(taskElement)
@@ -38,7 +38,7 @@ window.addEventListener('load', (event) => {
 })
 
 const deleteTask = (taskId) => {
-    fetch(`/delete-task/${taskId}`, {method:'put'})
+    fetch(`/delete-task/${taskId}`, {method:'delete'})
 } 
 
 const completeTask = (taskId) => {
