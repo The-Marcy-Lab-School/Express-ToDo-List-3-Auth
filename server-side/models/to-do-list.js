@@ -41,11 +41,11 @@ async function updateTask(req, res) {
     const {id} = req.params
     const {name, description} = req.body
     const dateAdded = new Date()
-    const queryText = 'UPDATE tasks SET (name, description, date_added) = ($2, $3, $4) WHERE task_id = $1 AND user_id = $5;'
+    const queryText = 'UPDATE tasks SET (name, description, date_added) = ($2, $3, $4) WHERE task_id = $1;'
     const client = await pool.connect()
     const result = await client.query(queryText, [id, name, description, dateAdded, user_id])
     const results = { 'results': (result) ? result.rows : null }
-    res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
+    res.sendFile(path.join(__dirname ,'../../views' , 'to-do-list.html'))
     client.release()
   }
   catch (err) {

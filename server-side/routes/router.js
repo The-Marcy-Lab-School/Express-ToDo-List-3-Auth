@@ -15,7 +15,7 @@ router.get('/completed-tasks', authenticate, listController.getAllCompletedTasks
 router.get('/tasks', authenticate, listController.getAllTasks)
 router.post('/add-task', authenticate, toDoList.addTask)
 router.delete('/delete-task/:id', authenticate, toDoList.deleteTask)
-router.put('/update-task/:id', authenticate, toDoList.updateTask)
+router.post('/update-task/:id', authenticate, toDoList.updateTask)
 router.put('/complete-task/:id', authenticate, toDoList.completeTask)
 
 //Client side paths
