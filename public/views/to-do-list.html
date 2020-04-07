@@ -9,21 +9,53 @@
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
     <link rel="stylesheet" href="../styles/style.css" type="text/css" />
+    <link rel="stylesheet" href="../styles/to-do-list.css" type="text/css" />
 </head>
 <body>
     <article>
         <header>
             <section>
                 <h1>To-Do List</h1>
+                <a class="button" href="#">Log Out</a>
+                <a class="button" href="/add-task-page">Add New Task</a>
             </section>
         </header>
         <main>
-            <section>
-                <a class="button" href="/home-page">Home</a>
-                <a class="button" href="/add-task-page">Add Task</a>
-                <a class="button" href="/home-page">Home</a>
-            </section>
+            <div id="list">
+                <div class="task-list" id="incomplete">
+                    <h1>To Do</h1>
+                    <div class="task">
+                        <h3 class="name">Walk Dog</h3>
+                        <p class="description">Walk him down the beach</p>
+                        <p class="dateAdded">Added 11/13/1998 5:34PM</p>
+                        <button class="button button-outline">Complete</button>
+                        <button class="button">Delete</button>
+                        <button class="button button-clear">Update</button>
+                    </div>
+                    <div class="task">
+                        <h3 class="name">Walk Dog</h3>
+                        <p class="description">Walk him down the beach</p>
+                        <p class="dateAdded">Added 11/13/1998 5:34PM</p>
+                        <button class="button button-outline">Complete</button>
+                        <button class="button">Delete</button>
+                        <button class="button button-clear">Update</button>
+                    </div>
+                </div>
+                <div class="task-list" id="complete">
+                    <h1>Completed</h1>
+                    <div class="task">
+                        <h3 class="name">Go shopping</h3>
+                        <p class="description">Get milk, eggs, water</p>
+                        <p class="dateAdded">Added 2/11/3002 5:34PM</p>
+                        <p class="dateCompleted">Completed 2/11/3002 9:34PM</p>
+                        <button class="button button-outline">Complete</button>
+                        <button class="button">Delete</button>
+                        <button class="button button-clear">Update</button>
+                    </div>
+                </div>
+            </div>
         </main>
     </article>
+    <script type="text/javascript" src="../to-do-list.js"></script>
 </body>
 </html>
