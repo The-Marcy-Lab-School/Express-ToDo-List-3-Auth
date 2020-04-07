@@ -14,22 +14,11 @@ window.addEventListener('load', (event) => {
                         <h3 class="name">${task.name}</h3>
                         <p class="description">${task.description}</p>
                         <p class="dateAdded">Added: ${task.date_added}</p>
-                        <button class="button button-outline complete-button">Complete</button>
-                        <button class="button delete-button">Delete</button>
-                        <a class="button button-clear update-button" href="/update-task/${task.task_id}">Update</a>
+                        <button onclick="completeTask(${task.task_id})" class="button button-outline complete-button">Complete</button>
+                        <button onclick="deleteTask(${task.task_id})" class="button delete-button">Delete</button>
+                        <a class="button button-clear update-button" href="/update-task-page">Update</a>
             `
                 incomplete.appendChild(taskElement)
-                
-                const completeButton = document.getElementsByClassName('complete-button')
-                const deleteButton = document.getElementsByClassName('delete-button')
-                const updateButton = document.getElementsByClassName('update-button')
-                
-                deleteButton.addEventListener('click', (event) => {
-                    fetch(`/delete-task/${task.task_id}`,{method:'post'})
-                })
-                completeButton.addEventListener('click', (event) => {
-                    fetch(`/complete-task/${task.task_id}`,{method:'post'})
-                })
             }
             
             if(task.is_complete === true){
@@ -40,19 +29,22 @@ window.addEventListener('load', (event) => {
                         <p class="description">${task.description}</p>
                         <p class="dateAdded">Added: ${task.date_added}</p>
                         <p class="dateCompleted">${task.date_complete}</p>
-                        <button class="button delete-button">Delete</button>
+                        <button onclick="deleteTask(${task.task_id})" class="button delete-button">Delete</button>
             `
                 complete.appendChild(taskElement)
-            
-                const deleteButton = document.getElementsByClassName('delete-button')
-                
-                deleteButton.addEventListener('click', (event) => {
-                    fetch(`/delete-task/${task.task_id}`,{method:'post'})
-                })
             }
         }
     })
 })
+
+const deleteTask = (taskId) => {
+    fetch(`/delete-task/${taskId}`,{method:'post'})
+} 
+
+const completeTask = (taskId) => {
+    fetch(`/complete-task/${taskId}`,{method:'post'})
+}
+
 
 
 
