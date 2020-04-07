@@ -8,18 +8,23 @@ window.addEventListener('load', (event) => {
         const tasksArray = tasks.results
         for(let task of tasksArray){
             if(task.is_complete === false){
-                complete.appendChild(document.createElement('div').classList.add("task").innerHTML = `
+                let taskElement = document.createElement('div')
+                taskElement.classList.add("task")
+                taskElement.innerHTML = `
                         <h3 class="name">${task.name}</h3>
                         <p class="description">${task.description}</p>
                         <p class="dateAdded">Added: ${task.date_added}</p>
                         <button class="button button-outline">Complete</button>
                         <button class="button">Delete</button>
                         <button class="button button-clear">Update</button>
-            `)
+            `
+                complete.appendChild(taskElement)
             }
             
             if(task.is_complete === true){
-                incomplete.appendChild(document.createElement('div').classList.add("task").innerHTML = `
+                let taskElement = document.createElement('div')
+                taskElement.classList.add("task")
+                taskElement.innerHTML = `
                         <h3 class="name">${task.name}</h3>
                         <p class="description">${task.description}</p>
                         <p class="dateAdded">Added: ${task.date_added}</p>
@@ -27,7 +32,8 @@ window.addEventListener('load', (event) => {
                         <button class="button button-outline">Complete</button>
                         <button class="button">Delete</button>
                         <button class="button button-clear">Update</button>
-            `)
+            `
+                incomplete.appendChild(taskElement)
             }
             
         }
