@@ -4,5 +4,5 @@ const complete = document.getElementById('complete')
 window.addEventListener('load', (event) => {
     fetch('/tasks')
     .then(res => res.json())
-    .then(tasks => console.log(tasks[0]))
+    .then(tasks => console.log(tasks.results[0]))
 })
