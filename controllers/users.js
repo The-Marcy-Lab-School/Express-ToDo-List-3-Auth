@@ -1,7 +1,6 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const User = require('../models/User');
-const path = require('path');
 
 const createUser = (req, res) => {
   const { name, email, password } = req.body;
@@ -36,7 +35,7 @@ const verifyUser = async(req, res, next) => {
     req.body.userEmail = user.email;
     req.body.userPassword = user.password;
     req.body.userId = user.id;
-    console.log("User Password: ", user.password)
+    console.log("User Password: ", user.password);
 
 
     const isValidPassword = await bcrypt.compare(password, user.password);
@@ -54,14 +53,13 @@ const verifyUser = async(req, res, next) => {
 };
 
 const getRegisterPage = (req, res) => {
-  res.sendFile(path.join('../views', 'register.html'));
+  res.sendFile('../views/register.html');
 };
 
 const getLoginPage = (req, res) => {
-  res.sendFile(path.join('../views', 'login.html'));
+  res.sendFile('../views/login.html');
 };
 
-// console.log(path.join('../views', 'login.html'));
 
 
 module.exports = {
