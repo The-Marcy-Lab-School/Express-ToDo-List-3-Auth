@@ -39,8 +39,9 @@ router.get('/add-task-page', (req, res) =>{
     res.sendFile(path.join(__dirname ,'../../public/views' , 'add-task.html'))
 })
 
-router.get('/update-task-page', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../public/views' , 'update-task.html'))
+router.get('/update-task/:id', (req, res) =>{
+    const id = req.params
+    res.render('update-task.ejs', {taskId: id})
 })
 
 
