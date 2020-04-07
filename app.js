@@ -8,6 +8,9 @@ const cookieParser = require('cookie-parser')
 
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: true}))
+
+app.use(express.static('public'))
+
 app.use(cookieParser())
 app.use(listRouter)
 
