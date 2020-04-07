@@ -11,18 +11,20 @@ const port = process.env.PORT || 8080;
 app.set('view engine', 'ejs');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
-app.use(express.static(__dirname + '/public'));
+app.use(express.static(`${__dirname}/public`));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    res.send('Helloooo');
+  res.send('Helloooo');
 });
 
 app.get('/register', userController.getRegisterPage);
 
 app.post('/register', userController.createUser);
 
-// app.post('/login', userController.login);
+app.get('/login', userController.getLoginPage);
+
+app.post('/login', userController.login);
 
 app.use(userController.verifyUser);
 

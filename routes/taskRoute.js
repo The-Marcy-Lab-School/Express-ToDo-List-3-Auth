@@ -2,9 +2,11 @@ const express = require('express');
 const taskController = require('../controllers/todos');
 const router = express.Router();
 
-router.get('/home', taskController.getAllTasksByUserEmail);
+router.get('/home', taskController.getTasks);
 
 router.get('/newTask', taskController.getCreateTask);
+
+router.get('/updateTask', taskController.getUpdateTask);
 
 router.post('/newTask', taskController.createTask);
 

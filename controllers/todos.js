@@ -1,31 +1,32 @@
 const Todo = require('../models/Todo');
 const userController = require('../controllers/users');
 const jwt = require('jsonwebtoken');
+const path = require('path');
 
 const createTask = async(req, res) => {
   try {
-    const { userEmail, name, description, dueDate } = req.body;
-    console.log(userEmail);
-    const test = await Todo.createTask(userEmail, name, description, dueDate);
-    console.log(test);
+    const { userId, name, description, dueDate } = req.body;
+    console.log(userId);
+    await Todo.createTask(userId, name, description, dueDate);
     const data = await Todo.getLastCreated();
     console.log(data);
     return res.status(201).json(data.rows);
   }
   catch (err) {
+    console.log(err);
     res.status(500).json({ error: 'Internal Server Error: Could not create task. Please try again.' });
   }
 };
 
-const getAllTasksByUserEmail = async(req, res) => {
+const getTasks = async(req, res) => {
   try {
-    const data = await Todo.getLastCreatedUser();
-    const result = await Todo.getAllTasksByUserEmail(data.rows[0].id);
-    if (!result) {
-      res.send('Task list is empty. Add a new task.');
+    const { userId } = req.body;
+    const result = await Todo.getTasksByUserId(userId);
+    if (result.length === 0) {
+      res.json({ message: 'Task list is empty. Add a new task.' });
     }
-    console.log(res.json(result.rows));
-    return result.json(result.rows);
+    console.log(res.json(result));
+    return res.json(result);
   }
   catch (err) {
     console.log(err);
@@ -34,37 +35,43 @@ const getAllTasksByUserEmail = async(req, res) => {
 };
 
 const updateTask = (req, res) => {
-  const { user, task } = req.params;
-  const { name, description, dueDate } = req.body;
-  Todo.updateTask(task, user, name, description, dueDate)
+  const { task } = req.params;
+  const { userId, name, description, dueDate } = req.body;
+  Todo.updateTask(task, userId, name, description, dueDate)
     .then(() => res.status(200).json({ message: 'Task successfully updated.' }))
     .catch(() => res.status(500).json({ error: 'Internal Server Error: Task could not be updated.' }));
 };
 
 const deleteTask = (req, res) => {
-  const { task, user } = req.params;
-  Todo.deleteTask(task, user)
+  const { task } = req.params;
+  const { userId } = req.body;
+  Todo.deleteTask(task, userId)
     .then(() => res.status(204).json({ message: 'Task successfully deleted.' }))
     .catch(() => res.status(500).json({ error: 'Internal Server Error: Task could not be deleted.' }));
 };
 
 const isCompleted = (req, res) => {
-  const { task, user } = req.params;
-  const { completed } = req.body;
-  Todo.isCompleted(task, user, completed)
+  const { task } = req.params;
+  const { userId, completed } = req.body;
+  Todo.isCompleted(task, userId, completed)
     .then((data) => res.json(data.rows[0]))
     .catch(() => res.status(500).json({ error: 'Internal Server Error: Could not set task as completed.' }));
 };
 
 const getCreateTask = (req, res) => {
-  res.render('createTask');
+  res.sendFile(path.join(__dirname, '../views', 'createTask.html'));
+};
+
+const getUpdateTask = (req, res) => {
+  res.sendFile(path.join(__dirname, '../views', 'updateTask.html'));
 };
 
 module.exports = {
   createTask,
-  getAllTasksByUserEmail,
+  getTasks,
   updateTask,
   deleteTask,
   isCompleted,
   getCreateTask,
+  getUpdateTask,
 };
