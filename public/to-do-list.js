@@ -48,8 +48,8 @@ const completeTask = (taskId) => {
 }
 
 const updateTask = (taskId) => {
-    document.getElementById("updateForm").action = `/update-task/${taskId}`
-    location ='/to-do-list'
+    //document.getElementById("updateForm").action = `/update-task/${taskId}`
+    location =`/update-task/${taskId}`
 }
 
 
