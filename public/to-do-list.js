@@ -39,10 +39,12 @@ window.addEventListener('load', (event) => {
 
 const deleteTask = (taskId) => {
     fetch(`/delete-task/${taskId}`, {method:'delete'})
+    location.reload()
 } 
 
 const completeTask = (taskId) => {
     fetch(`/complete-task/${taskId}`, {method:'put'})
+    location.reload()
 }
 
 
