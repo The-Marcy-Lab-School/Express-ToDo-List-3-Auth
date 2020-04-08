@@ -31,6 +31,8 @@ router.get('/login-page', (req, res) =>{
     res.sendFile(path.join(__dirname ,'../../public/views' , 'login.html'))
 })
 
+router.get('/logout', userController.logout)
+
 router.get('/to-do-list', (req, res) =>{
     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
 })

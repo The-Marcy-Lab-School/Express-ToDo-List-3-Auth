@@ -2,6 +2,7 @@ const express = require('express')
 const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
+const path = require('path')
 
 
 const register = (req, res) => {
@@ -40,8 +41,14 @@ const login = async (req, res, next) => {
   return res.status(403).send('Invalid Email/Password')
 }
 
+const logout = async (req, res) => {
+   res.clearCookie('token')
+   res.sendFile(path.join(__dirname ,'../../public/views' , 'index.html'))
+}
+
 
 module.exports = {
   register,
-  login
+  login,
+  logout
 }
