@@ -4,6 +4,7 @@ const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const path = require('path')
 const fetch = require('node-fetch')
+const pool = require('../../db')
 
 
 const register = (req, res) => {
@@ -25,23 +26,20 @@ const register = (req, res) => {
     })
 }
 
-const login = async (req, res) => {
-  const {email, password} = req.body
-  const user = await User.getByEmail(email)
-  console.log(user)
-  if (!user) {
-     return res.status(401).send('Invalid Email')
+async function login(req, res){
+  try {
+    const {email, password} = req.body
+    const queryText = 'SELECT * FROM users WHERE email = $1'
+    const client = await pool.connect()
+    const result = await client.query(queryText, [email])
+    const results = { 'results': (result) ? result.rows : null }
+    res.send(results)
+    client.release()
   }
-  
-  // const isValidPassword = await bcrypt.compare(password, user.hashed_password)
-  
-  // if (isValidPassword) {
-  //   const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
-  //   res.cookie('token', token)
-  //   res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
-  // }
-  
-  return res.status(403).send('Password')
+  catch (err) {
+    console.error(err)
+    res.send('err')
+  }
   
 }
 
