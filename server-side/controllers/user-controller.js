@@ -29,6 +29,7 @@ const login = async (req, res, next) => {
   
   const {email, password} = req.body
   const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
+  console.log(user)
   
   // if (!user[0]) {
   //   return res.status(401).send(user[0])
