@@ -33,12 +33,12 @@ const updateTask = async(taskId) => {
 };
 
 const deleteTask = async(taskId) => {
-  const response = await fetch(`/deleteTask/${taskId}`, { method: 'DELETE' });
+  await fetch(`/deleteTask/${taskId}`, { method: 'DELETE' });
   window.location.reload();
 };
 
 const completeTask = async(taskId) => {
-  const response = await fetch(`/isComplete/${taskId}`, { method: 'PUT' });
+  await fetch(`/isComplete/${taskId}`, { method: 'PUT' });
   window.location.reload();
 };
 
