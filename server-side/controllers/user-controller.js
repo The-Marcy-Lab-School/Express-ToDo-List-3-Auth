@@ -36,7 +36,7 @@ const login = async (req, res, next) => {
   if (isValidPassword) {
     const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
     res.cookie('token', token)
-    return res.status(200).send('Successfully logged in')
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
   }
   return res.status(403).send('Invalid Email/Password')
 }
