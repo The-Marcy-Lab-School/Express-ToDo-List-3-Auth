@@ -50,3 +50,4 @@ Users can register with an email and password.(password is also encrypted)
 Create:Make a post request to '/register'  with email and password to create your user.
 
 
+unpack the jwt token with jwt.verify and take in user id and take a look at password

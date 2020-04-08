@@ -1,5 +1,6 @@
 const Task = require('../models/To-do');
 
+
 const getAll = (req, res) => {
   Task.getAll()
     .then((data) => res.status(200).json(data.rows))
@@ -9,11 +10,11 @@ const getAll = (req, res) => {
     });
 };
 
-const getTaskById = (req,res) =>{
+const getTaskById = (req, res) => {
   const { id } = req.params;
   Task.getTask(id)
     .then((data) => res.status(200).json(data.rows))
-    .catch((err)=>{
+    .catch((err) => {
       console.log(err);
       res.status(500).send('500 Internal Server Error');
     });
@@ -21,10 +22,10 @@ const getTaskById = (req,res) =>{
 
 const createTask = (req, res) => {
   const {
-    userId,taskName, taskDescription, dueDate, isComplete,
+    userId, taskName, taskDescription, dueDate, isComplete,
   } = req.body;
-  Task.createTask(userId,taskName, taskDescription, dueDate, isComplete)
-    .then(() => Task.getLastTask())
+  Task.createTask(userId, taskName, taskDescription, dueDate, isComplete)
+    .then(() => Task.getAll())
     .then((data) => res.status(201).json(data.rows[0]))
     .catch((err) => {
       console.log(err);
@@ -38,7 +39,8 @@ const updateTask = (req, res) => {
     taskName, taskDescription, dueDate, isComplete,
   } = req.body;
   Task.updateTask(id, taskName, taskDescription, dueDate, isComplete)
-    .then(() => res.status(200).send('200 Successfully Updated Task' ))
+    // .then(() => res.status(200).send('200 Successfully Updated Task'))
+    .then(() => res.redirect('/showTask'))
     .catch((err) => {
       console.log(err);
       res.status(500).send('500 Internal Server Error');
