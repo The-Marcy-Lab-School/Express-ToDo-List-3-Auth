@@ -43,7 +43,7 @@ D: Delete tasks (Delete task for list of tasks)
 
 
 Getting Started
-This application is deployed here <a href="https://quiet-chamber-63376.herokuapp.com/login"></a>
+This application is deployed [here](https://quiet-chamber-63376.herokuapp.com/login)
 
 If you want to run it locally, clone this repository and run npm install. Then, run npm start or node app.js.
 
