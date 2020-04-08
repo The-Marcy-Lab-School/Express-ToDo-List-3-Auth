@@ -25,24 +25,24 @@ const register = (req, res) => {
     })
 }
 
-const login = async (req, res, next) => {
+// const login = async (req, res, next) => {
   
-  const {email, password} = req.body
-  const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
-  console.log(user)
+//   const {email, password} = req.body
+//   const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
+//   console.log(user)
   
-  // if (!user[0]) {
-  //   return res.status(401).send(user[0])
-  // }
-  const isValidPassword = await bcrypt.compare(password, user[0].hashed_password)
+//   // if (!user[0]) {
+//   //   return res.status(401).send(user[0])
+//   // }
+//   const isValidPassword = await bcrypt.compare(password, user[0].hashed_password)
   
-  if (isValidPassword) {
-    const token = jwt.sign({ email: email, password: user[0].hashedPassword }, 'secret')
-    res.cookie('token', token)
-    res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
-  }
-  return res.status(403).send('Invalid Email/Password')
-}
+//   if (isValidPassword) {
+//     const token = jwt.sign({ email: email, password: user[0].hashedPassword }, 'secret')
+//     res.cookie('token', token)
+//     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
+//   }
+//   return res.status(403).send('Invalid Email/Password')
+// }
 
 const logout = async (req, res) => {
    res.clearCookie('token')
@@ -52,6 +52,6 @@ const logout = async (req, res) => {
 
 module.exports = {
   register,
-  login,
+  //login,
   logout
 }
