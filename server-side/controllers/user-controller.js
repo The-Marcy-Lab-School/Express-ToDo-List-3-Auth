@@ -35,8 +35,21 @@ async function login(req, res){
     const result = await client.query(queryText, [email])
     const results = { 'userArr': (result) ? result.rows : null }
     const user = results.userArr[0]
-    res.send(user)
-    client.release()
+    
+    if (!user.email) {
+      return res.status(401).send('Invalid Email')
+    }
+    
+    const isValidPassword = await bcrypt.compare(password, user.hashed_password)
+  
+    if (isValidPassword) {
+      const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
+      res.cookie('token', token)
+      res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
+    }
+    return res.status(403).send('Invalid Email/Password')
+    // res.send(user)
+    // client.release()
   }
   catch (err) {
     console.error(err)
