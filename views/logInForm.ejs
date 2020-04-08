@@ -1,0 +1,26 @@
+<%- include('./partials/header'); -%>
+
+<form id="login">
+  <fieldset>
+    <legend>Log In</legend>
+    <h1>Log In</h1>
+    <p id="msg"></p>
+    <ul class="login-inputs">
+
+      <li class="login-input">
+        <label for="email">Email</label>
+        <input type="email" name="email" id="email" placeholder="ada.love@mail.com" required>
+      </li>
+
+      <li class="login-input">
+        <label for="password">Password</label>
+        <input type="password" name="password" id="password" required>
+      </li>
+
+      <li>
+        <input type="submit" value="Log In">
+      </li>
+    </ul>
+  </fieldset>
+</form>
+<script type="text/javascript" src="javascripts/logIn.js"></script>
