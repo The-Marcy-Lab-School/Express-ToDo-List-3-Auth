@@ -18,7 +18,7 @@ const register = (req, res) => {
     })
     .then((token) => {
       res.cookie('token', token)
-      res.status(200).send(`Cookie set with token: ${token}`)
+      res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
     })
     .catch((err) => {
       console.log(err)
@@ -29,7 +29,6 @@ const register = (req, res) => {
 async function login(req, res){
   try {
     const {email, password} = req.body
-    console.log(email, password)
     const queryText = 'SELECT * FROM users WHERE email = $1'
     const client = await pool.connect()
     const result = await client.query(queryText, [email])
@@ -42,16 +41,11 @@ async function login(req, res){
     
     const isValidPassword = await bcrypt.compare(password, user.hashed_password)
     
-    console.log(isValidPassword)
-    
     if (isValidPassword) {
       const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
       res.cookie('token', token)
       res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
     }
-    //return res.status(403).send('Invalid Email/Password')
-    // res.send(user)
-    // client.release()
   }
   catch (err) {
     console.error(err)
@@ -59,24 +53,6 @@ async function login(req, res){
   }
   
 }
-
-// const login = async (req, res) => {
-  
-//   const {email, password} = req.body
-//   const user = await User.getByEmail(email)
-  
-//   if (!user) {
-//     return res.status(401).send('Invalid Email')
-//   }
-//   const isValidPassword = await bcrypt.compare(password, user.hashed_password)
-  
-//   if (isValidPassword) {
-//     const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
-//     res.cookie('token', token)
-//     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
-//   }
-//   return res.status(403).send('Invalid Email/Password')
-// }
 
 const logout = (req, res) => {
    res.clearCookie('token')
