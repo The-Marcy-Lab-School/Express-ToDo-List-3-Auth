@@ -9,7 +9,7 @@ const authenticate = require('../auth/verify')
 const path = require('path')
 
 //API paths
-router.get('/login', userController.login)
+router.post('/login', userController.login)
 router.post('/register', userController.register)
 router.get('/incomplete-tasks', authenticate, listController.getAllIncompletedTasks)
 router.get('/completed-tasks', authenticate, listController.getAllCompletedTasks)
