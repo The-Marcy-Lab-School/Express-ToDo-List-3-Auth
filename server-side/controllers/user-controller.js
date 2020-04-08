@@ -49,7 +49,7 @@ async function login(req, res){
       res.cookie('token', token)
       res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
     }
-    return res.status(403).send('Invalid Email/Password')
+    //return res.status(403).send('Invalid Email/Password')
     // res.send(user)
     // client.release()
   }
