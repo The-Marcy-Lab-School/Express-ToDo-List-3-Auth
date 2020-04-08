@@ -30,13 +30,13 @@ const login = async (req, res, next) => {
   const {email, password} = req.body
   const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
   
-  if (!user) {
+  if (!user[0]) {
     return res.status(401).send('Invalid Email')
   }
-  const isValidPassword = await bcrypt.compare(password, user.hashed_password)
+  const isValidPassword = await bcrypt.compare(password, user[0].hashed_password)
   
   if (isValidPassword) {
-    const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
+    const token = jwt.sign({ email: email, password: user[0].hashedPassword }, 'secret')
     res.cookie('token', token)
     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
   }
