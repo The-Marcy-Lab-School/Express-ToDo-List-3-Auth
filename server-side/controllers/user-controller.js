@@ -35,7 +35,7 @@ async function login(req, res){
     const result = await client.query(queryText, [email])
     const results = { 'results': (result) ? result.rows : null }
     const user = results[0]
-    res.send(user)
+    res.send(results.email)
     client.release()
   }
   catch (err) {
