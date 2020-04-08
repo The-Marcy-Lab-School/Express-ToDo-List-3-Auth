@@ -15,10 +15,10 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    res.send('Helloooo');
+  res.send('Helloooo');
 });
 
-//Routes for user controllers - signing in, registering
+// Routes for user controllers - signing in, registering
 
 app.post('/register', userController.createUser);
 
@@ -26,7 +26,7 @@ app.post('/login', userController.verifyUser);
 
 app.use(userController.authenticate);
 
-//Routes for loading views
+// Routes for loading views
 app.get('/userRegister', userController.getRegisterPage);
 
 app.get('/userLogin', userController.getLoginPage);

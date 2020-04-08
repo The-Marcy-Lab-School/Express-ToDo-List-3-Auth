@@ -1,7 +1,7 @@
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
-const User = require('../models/User');
 const path = require('path');
+const User = require('../models/User');
 
 const createUser = (req, res) => {
   const { name, email, password } = req.body;
@@ -9,20 +9,23 @@ const createUser = (req, res) => {
   const saltRounds = 8;
   bcrypt.hash(password, saltRounds)
     .then((hashedPassword) => {
-      console.log('Hashed Password: ', hashedPassword);
       User.createUser(name, email, hashedPassword);
-      return jwt.sign({ name, email, password, exp: Math.floor(Date.now() / 1000) + (15 * 60) }, 'Do Not Open', (err, encryptedPayload) => {
+      return jwt.sign({
+        name,
+        email,
+        password,
+        exp: Math.floor(Date.now() / 1000) + (15 * 60),
+      }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
         res.redirect('/home');
       });
     })
     .catch((err) => {
-      console.log(err);
       res.send(err);
     });
 };
 
-const authenticate = async(req, res, next) => {
+const authenticate = async (req, res, next) => {
   if (!req.cookies.userToken) {
     return res.status(401).send('Only logged in users can access this page.');
   }
@@ -44,14 +47,12 @@ const authenticate = async(req, res, next) => {
     }
 
     return res.status(403).send('Unauthorized User: Try logging in again.');
-  }
-  catch (err) {
-    console.log(err);
+  } catch (err) {
     return res.send(err);
   }
 };
 
-const verifyUser = async(req, res, next) => {
+const verifyUser = async (req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.getUserByEmail(email);
@@ -64,16 +65,19 @@ const verifyUser = async(req, res, next) => {
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (isValidPassword) {
-      return jwt.sign({ userId: user.id, email, password, expiresIn: "1h" }, 'Do Not Open', (err, encryptedPayload) => {
+      return jwt.sign({
+        userId: user.id,
+        email,
+        password,
+        expiresIn: '1h',
+      }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
         res.redirect('/home');
       });
     }
 
     return res.status(403).send('Email or password is incorrect.');
-  }
-  catch (err) {
-    console.log(err);
+  } catch (err) {
     return res.send(err);
   }
 };

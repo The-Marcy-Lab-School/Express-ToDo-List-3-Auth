@@ -4,7 +4,7 @@ const updateTask = async(taskId) => {
 
   button.addEventListener('click', () => {
     updateForm.innerHTML = `
-    <form id="nameForm" method="put" action="/updateTask/${taskId}">
+    <form id="nameForm" method="post" action="/updateTask/${taskId}">
       <label for="name">Name</label>
       <input id="newName" type="text" name="name"/>
       <label for="description">Description</label>
@@ -17,14 +17,14 @@ const updateTask = async(taskId) => {
 
     const form = document.getElementById('nameForm');
 
-    form.addEventListener('submit', (e) => {
+    form.addEventListener('submit', () => {
       fetch(`/updateTask/${taskId}`, {
           method: 'POST',
           body: {
             name: form.newName.value,
             description: form.newDesc.value,
-            dueDate: form.newDate.value
-          }
+            dueDate: form.newDate.value,
+          },
         })
         .then(() => window.location.reload())
         .catch((err) => console.log(err));
@@ -38,17 +38,14 @@ const deleteTask = async(taskId) => {
 };
 
 const completeTask = async(taskId) => {
-  const response = await fetch(`/completeTask/${taskId}`, { method: 'PUT' });
-  console.log(response);
+  const response = await fetch(`/isComplete/${taskId}`, { method: 'PUT' });
   window.location.reload();
 };
 
 window.addEventListener('load', async() => {
   try {
     const response = await fetch('/tasks', { method: 'GET' });
-    console.log(response.body);
     const data = await response.json();
-    console.log(`Data: ${data}`);
 
     if (data.length === 0) {
       return data;
