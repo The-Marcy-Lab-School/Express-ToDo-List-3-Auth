@@ -25,25 +25,45 @@ const register = (req, res) => {
     })
 }
 
-const login = async (req, res, next) => {
-  
+const login = (req, res) => {
   const {email, password} = req.body
-  const user = await User.getByEmail(email)
+  const user = User.getByEmail(email)
   
   if (!user) {
-    return res.status(401).send('Invalid Email')
+     return res.status(401).send('Invalid Email')
   }
-  const isValidPassword = await bcrypt.compare(password, user.hashed_password)
+  
+  const isValidPassword = bcrypt.compare(password, user.hashed_password)
   
   if (isValidPassword) {
     const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
     res.cookie('token', token)
     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
   }
+  
   return res.status(403).send('Invalid Email/Password')
+  
 }
 
-const logout = async (req, res) => {
+// const login = async (req, res) => {
+  
+//   const {email, password} = req.body
+//   const user = await User.getByEmail(email)
+  
+//   if (!user) {
+//     return res.status(401).send('Invalid Email')
+//   }
+//   const isValidPassword = await bcrypt.compare(password, user.hashed_password)
+  
+//   if (isValidPassword) {
+//     const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
+//     res.cookie('token', token)
+//     res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
+//   }
+//   return res.status(403).send('Invalid Email/Password')
+// }
+
+const logout = (req, res) => {
    res.clearCookie('token')
    res.sendFile(path.join(__dirname ,'../../public/views' , 'index.html'))
 }
