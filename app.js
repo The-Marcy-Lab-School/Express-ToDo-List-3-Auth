@@ -27,6 +27,8 @@ app.post('/register', userController.authorize);
 
 app.get('/login', userController.login);
 
+app.get('/logout', userController.logout);
+
 app.post('/login', userController.verifyLogin);
 
 app.use(userController.authenticate);
@@ -50,5 +52,7 @@ app.put('/markComplete/:id', taskController.markComplete);
 
 // sends a static html file with table vaules
 app.get('/addTask', userController.showTaskForm);
+
+
 
 app.listen(port, () => console.log(`Server listening on port ${port}...`));

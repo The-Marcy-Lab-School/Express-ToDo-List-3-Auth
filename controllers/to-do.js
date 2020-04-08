@@ -25,7 +25,7 @@ const createTask = (req, res) => {
     userId, taskName, taskDescription, dueDate, isComplete,
   } = req.body;
   Task.createTask(userId, taskName, taskDescription, dueDate, isComplete)
-    .then(() => Task.getAll())
+    .then(() => Task.getTask(userId))
     .then((data) => res.status(201).json(data.rows[0]))
     .catch((err) => {
       console.log(err);

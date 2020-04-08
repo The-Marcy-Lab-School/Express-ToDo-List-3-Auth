@@ -105,9 +105,10 @@ const updateTaskForm = (req, res) => {
   res.sendFile(path.join(__dirname, '../views', 'updateTask.html'));
 };
 
-// const logout = (req,res) =>{
-//   res.clearCookie('userToken');
-// };
+const logout = (req,res) =>{
+  res.clearCookie('userToken');
+  res.redirect('/');
+};
 
 module.exports = {
   authorize,
@@ -119,4 +120,5 @@ module.exports = {
   showTaskForm,
   showTasks,
   updateTaskForm,
+  logout,
 };
