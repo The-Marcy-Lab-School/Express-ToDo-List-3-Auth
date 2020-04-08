@@ -1,0 +1,31 @@
+{
+  "name": "problem-set-7_4",
+  "version": "1.0.0",
+  "description": "## Project Overview The purpose of this Problem Set is to merge your work from Problem Set 7.1 and Problem Set 7.3. You will rebuild your MVC To-Do list from 7.1 using the RESTful API that you created in 7.3. Instead of sending rendered templates in response to an incoming request, you will make AJAX requests to your backend, handle JSON responses, and render to-do's to the DOM.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Devonte202/problem-set-7_4.git"
+  },
+  "author": "Devonte Gianni Duncan",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Devonte202/problem-set-7_4/issues"
+  },
+  "homepage": "https://github.com/Devonte202/problem-set-7_4#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "heroku": "^7.39.2",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.0",
+    "pg": "^8.0.0"
+  }
+}

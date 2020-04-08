@@ -1,0 +1,7 @@
+section{
+    text-align: left;
+}
+
+#nameField{
+    display: flex;
+}

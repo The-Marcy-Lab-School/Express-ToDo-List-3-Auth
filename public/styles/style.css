@@ -1,0 +1,17 @@
+header{
+    display: flex;
+    justify-content: center;
+}
+
+main{
+    display: flex;
+    justify-content: center;
+}
+
+section{
+    text-align: center;
+}
+
+article{
+    margin-top: 70px;
+}
