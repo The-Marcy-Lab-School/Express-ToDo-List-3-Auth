@@ -11,8 +11,8 @@ async function getByEmail(email) {
   const queryText = 'SELECT * FROM users WHERE email = $1'
   return db.query(queryText, [email])
     .then((data) => {
-      console.log(data.rows[0])
-      return data.rows[0]
+      console.log(data)
+      return data
     })
 }
 

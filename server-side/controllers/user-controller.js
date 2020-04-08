@@ -25,7 +25,7 @@ const register = (req, res) => {
     })
 }
 
-const login = (req, res) => {
+const login = async (req, res) => {
   const {email, password} = req.body
   const user = User.getByEmail(email)
   
@@ -33,7 +33,7 @@ const login = (req, res) => {
      return res.status(401).send('Invalid Email')
   }
   
-  const isValidPassword = bcrypt.compare(password, user.hashed_password)
+  const isValidPassword = await bcrypt.compare(password, user.hashed_password)
   
   if (isValidPassword) {
     const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
