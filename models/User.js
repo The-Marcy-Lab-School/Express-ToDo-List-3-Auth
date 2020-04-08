@@ -2,10 +2,10 @@ const bcrypt = require('bcrypt');
 const db = require('../db');
 
 class User {
-  static add(email, password) {
+  static add(email, password, username) {
     const queryText = `INSERT INTO users (email, password,username)
     VALUES ($1, $2,$3);`;
-    return db.query(queryText, [email, password]);
+    return db.query(queryText, [email, password, username]);
   }
 
   static getByEmail(email) {
