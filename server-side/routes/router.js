@@ -18,7 +18,6 @@ router.post('/add-task', authenticate, toDoList.addTask)
 router.delete('/delete-task/:id', authenticate, toDoList.deleteTask)
 router.post('/update-task/:id', authenticate, toDoList.updateTask)
 router.put('/complete-task/:id', authenticate, toDoList.completeTask)
-router.get('/user/:email', User.getByEmail)
 
 //Client side paths
 router.get('/', (req, res) =>{

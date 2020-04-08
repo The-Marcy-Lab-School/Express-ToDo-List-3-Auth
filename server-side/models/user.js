@@ -7,7 +7,7 @@ async function addUser(first_name, last_name, email, hashedPassword) {
   return db.query(queryText, [first_name, last_name, email, hashedPassword])
 }
 
-async function getByEmail(email) {
+function getByEmail(email) {
   const queryText = 'SELECT * FROM users WHERE email = $1'
   db.query(queryText, [email])
     .then((data) => {

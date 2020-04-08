@@ -33,15 +33,15 @@ const login = async (req, res) => {
      return res.status(401).send('Invalid Email')
   }
   
-  const isValidPassword = await bcrypt.compare(password, user.hashed_password)
+  // const isValidPassword = await bcrypt.compare(password, user.hashed_password)
   
-  if (isValidPassword) {
-    const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
-    res.cookie('token', token)
-    res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
-  }
+  // if (isValidPassword) {
+  //   const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
+  //   res.cookie('token', token)
+  //   res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
+  // }
   
-  return res.status(403).send('Invalid Email/Password')
+  return res.status(403).send('Password')
   
 }
 
