@@ -1,0 +1,35 @@
+{
+  "name": "problem-set-7_4",
+  "version": "1.0.0",
+  "description": "Full-stack Todo List app.",
+  "main": "app.js",
+  "scripts": {
+    "test": "jest",
+    "start": "node app.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Seal125/problem-set-7_4.git"
+  },
+  "author": "Stephanie Smith",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Seal125/problem-set-7_4/issues"
+  },
+  "homepage": "https://github.com/Seal125/problem-set-7_4#readme",
+  "dependencies": {
+    "bcrypt": "^4.0.1",
+    "body-parser": "^1.19.0",
+    "cookie-parser": "^1.4.5",
+    "ejs": "^3.0.2",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "node-fetch": "^2.6.0",
+    "pg": "^7.18.2"
+  },
+  "devDependencies": {
+    "eslint": "^6.8.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-plugin-import": "^2.20.2"
+  }
+}

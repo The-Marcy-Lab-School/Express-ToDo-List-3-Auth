@@ -1,0 +1,25 @@
+.list {
+  padding-left: 1%;
+}
+
+.form {
+  margin: 0;
+}
+
+.header {
+  text-align: center;
+  padding-top: 2%;
+}
+
+.task-form {
+  width: 20%;
+  margin-left: 40%;
+}
+
+.link {
+  margin-left: 47%;
+}
+
+.buttons {
+  border-top: 0.1rem solid #e1e1e1;
+}
