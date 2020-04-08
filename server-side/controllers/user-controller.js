@@ -33,8 +33,9 @@ async function login(req, res){
     const queryText = 'SELECT * FROM users WHERE email = $1'
     const client = await pool.connect()
     const result = await client.query(queryText, [email])
-    const results = { 'results': (result) ? result.rows : null }
-    res.send(results.results)
+    const results = { 'userArr': (result) ? result.rows : null }
+    const user = results.userArr[0]
+    res.send(user)
     client.release()
   }
   catch (err) {
