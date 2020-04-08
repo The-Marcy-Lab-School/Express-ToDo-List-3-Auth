@@ -9,10 +9,10 @@ async function addUser(first_name, last_name, email, hashedPassword) {
 
 async function getByEmail(email) {
   const queryText = 'SELECT * FROM users WHERE email = $1'
-  return db.query(queryText, [email])
+  db.query(queryText, [email])
     .then((data) => {
       console.log(data)
-      return data
+      return data.rows[0]
     })
 }
 
