@@ -16,7 +16,9 @@ const encryptPassword = async (plainTextPassword) => {
 // consider an error as originitating from the UNIQUE constraint of the email
 // colum. Hint user of possible sources of error!
 const attemptSignUp = async (req, res) => {
-  const { firstName, lastName, email, password } = req.body;
+  const {
+    firstName, lastName, email, password,
+  } = req.body;
   const hash = await encryptPassword(password);
 
   try {
