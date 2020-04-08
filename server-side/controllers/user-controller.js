@@ -41,7 +41,9 @@ async function login(req, res){
     }
     
     const isValidPassword = await bcrypt.compare(password, user.hashed_password)
-  
+    
+    console.log(isValidPassword)
+    
     if (isValidPassword) {
       const token = jwt.sign({ email: email, password: user.hashedPassword }, 'secret')
       res.cookie('token', token)
