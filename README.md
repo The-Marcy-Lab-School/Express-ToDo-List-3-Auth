@@ -9,4 +9,4 @@
 
 4. Logout implemented with token expiration.
 
-**Heroku App** [https://lit-coast-27736.herokuapp.com/]
+**Heroku App:** https://lit-coast-27736.herokuapp.com/
