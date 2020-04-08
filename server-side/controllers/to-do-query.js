@@ -12,7 +12,7 @@ async function getAllIncompletedTasks(req, res) {
   }
   catch (err) {
     console.error(err);
-    res.send('My bad');
+    res.send('err');
   }
 }
 
