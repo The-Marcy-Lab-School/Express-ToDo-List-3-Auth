@@ -15,14 +15,12 @@
 <body>
   <h1 class="header">Update Task</h1>
 
-  <form method='post'>
+  <form method='post' action='/update/<%= task.id %>'>
     <fieldset class="task-form">
       <label for='taskTitle'>New Task Title</label>
-      <input type='text' id='taskTitle' name='name' />
-      <label for='taskTitle'>New Description</label>
-      <textarea name="description" id="description"></textarea>
+      <input type='text' id='taskTitle' name='title' value='<%= task.title %>' />
       <label for="date">New Due Date</label>
-      <input type='datetime-local' id='date' name='dueDate' />
+      <input type='datetime-local' id='date' name='dueDate' value=<%=t ask.dueDate %> />
 
       <input type='submit' value="Update Task" />
     </fieldset>

@@ -22,9 +22,10 @@ class Todo {
     return db.query(queryText);
   }
 
-  static updateTask(taskId, userId, name, description, dueDate) {
-    const queryText = 'UPDATE tasks SET name = $3, description = $4, due_date = $5 WHERE id = $1 AND user_id = $2;';
-    return db.query(queryText, [taskId, userId, name, description, dueDate]);
+  static updateTask(taskId, name, description, dueDate) {
+    const queryText = 'UPDATE tasks SET name = $2, description = $3, due_date = $4 WHERE id = $1;';
+    return db.query(queryText, [taskId, name, description, dueDate])
+      .then((data) => data.rows);
   }
 
   static deleteTask(taskId, userId) {
@@ -32,13 +33,9 @@ class Todo {
     return db.query(queryText, [taskId, userId]);
   }
 
-  static isCompleted(taskId, userId, completed) {
-    if (completed === 't') {
-      const queryText = 'UPDATE tasks SET completed = false WHERE id = $1 AND user_id = $2;';
-      return db.query(queryText, [taskId, userId]);
-    }
-    const queryText = 'UPDATE tasks SET completed = true WHERE id = $1 AND user_id = $2;';
-    return db.query(queryText, [taskId, userId]);
+  static isCompleted(taskId) {
+    const queryText = 'UPDATE tasks SET completed = NOT completed WHERE id = $1;';
+    return db.query(queryText, [taskId]);
   }
 }
 

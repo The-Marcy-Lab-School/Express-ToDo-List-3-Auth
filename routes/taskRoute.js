@@ -6,8 +6,6 @@ router.get('/tasks', taskController.getTasks);
 
 router.get('/newTask', taskController.getCreateTask);
 
-router.get('/updateTask', taskController.getUpdateTask);
-
 router.post('/newTask', taskController.createTask);
 
 router.put('/updateTask/:task', taskController.updateTask);

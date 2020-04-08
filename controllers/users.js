@@ -11,7 +11,7 @@ const createUser = (req, res) => {
     .then((hashedPassword) => {
       console.log('Hashed Password: ', hashedPassword);
       User.createUser(name, email, hashedPassword);
-      return jwt.sign({ name, email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      return jwt.sign({ name, email, password, exp: Math.floor(Date.now() / 1000) + (15 * 60) }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
         res.redirect('/home');
       });
@@ -31,8 +31,6 @@ const authenticate = async(req, res, next) => {
   try {
     const user = await User.getUserByEmail(email);
 
-    req.body.userEmail = user.email;
-    req.body.userPassword = user.password;
     req.body.userId = user.id;
 
     if (!user) {
@@ -60,14 +58,13 @@ const verifyUser = async(req, res, next) => {
     if (!user) {
       return res.status(403).send('User does not exist.');
     }
-    req.body.userEmail = user.email;
-    req.body.userPassword = user.password;
+
     req.body.userId = user.id;
 
     const isValidPassword = await bcrypt.compare(password, user.password);
 
     if (isValidPassword) {
-      return jwt.sign({ userId: user.id, email, password }, 'Do Not Open', (err, encryptedPayload) => {
+      return jwt.sign({ userId: user.id, email, password, expiresIn: "1h" }, 'Do Not Open', (err, encryptedPayload) => {
         res.cookie('userToken', encryptedPayload, { httpOnly: true });
         res.redirect('/home');
       });
