@@ -20,27 +20,27 @@ router.put('/complete-task/:id', authenticate, toDoList.completeTask)
 
 //Client side paths
 router.get('/', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../views' , 'index.html'))
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'index.html'))
 })
 
 router.get('/register-page', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../views' , 'register.html'))
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'register.html'))
 })
 
 router.get('/login-page', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../views' , 'login.html'))
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'login.html'))
 })
 
 router.get('/to-do-list', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../views' , 'to-do-list.html'))
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'to-do-list.html'))
 })
 
 router.get('/add-task-page', (req, res) =>{
-    res.sendFile(path.join(__dirname ,'../../views' , 'add-task.html'))
+    res.sendFile(path.join(__dirname ,'../../public/views' , 'add-task.html'))
 })
 
 router.get('/update-task/:id', (req, res) =>{
-    const id = req.params
+    const {id} = req.params
     res.render('update-task.ejs', {taskId: id})
 })
 
