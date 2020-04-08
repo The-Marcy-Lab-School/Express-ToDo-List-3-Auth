@@ -28,7 +28,7 @@ const register = (req, res) => {
 const login = async (req, res, next) => {
   
   const {email, password} = req.body
-  const user = await fetch(`/user/${email}`)
+  const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
   
   if (!user) {
     return res.status(401).send('Invalid Email')
