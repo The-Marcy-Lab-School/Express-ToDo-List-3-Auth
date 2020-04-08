@@ -34,7 +34,8 @@ async function login(req, res){
     const client = await pool.connect()
     const result = await client.query(queryText, [email])
     const results = { 'results': (result) ? result.rows : null }
-    res.send(results)
+    const user = results[0]
+    res.send(user)
     client.release()
   }
   catch (err) {
