@@ -29,6 +29,7 @@ const register = (req, res) => {
 async function login(req, res){
   try {
     const {email, password} = req.body
+    console.log(email, password)
     const queryText = 'SELECT * FROM users WHERE email = $1'
     const client = await pool.connect()
     const result = await client.query(queryText, [email])
