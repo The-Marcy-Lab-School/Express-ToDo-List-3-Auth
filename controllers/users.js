@@ -25,7 +25,7 @@ const createUser = (req, res) => {
     });
 };
 
-const authenticate = async (req, res, next) => {
+const authenticate = async(req, res, next) => {
   if (!req.cookies.userToken) {
     return res.status(401).send('Only logged in users can access this page.');
   }
@@ -47,12 +47,13 @@ const authenticate = async (req, res, next) => {
     }
 
     return res.status(403).send('Unauthorized User: Try logging in again.');
-  } catch (err) {
+  }
+  catch (err) {
     return res.send(err);
   }
 };
 
-const verifyUser = async (req, res, next) => {
+const verifyUser = async(req, res, next) => {
   const { email, password } = req.body;
   try {
     const user = await User.getUserByEmail(email);
@@ -77,7 +78,8 @@ const verifyUser = async (req, res, next) => {
     }
 
     return res.status(403).send('Email or password is incorrect.');
-  } catch (err) {
+  }
+  catch (err) {
     return res.send(err);
   }
 };
@@ -94,6 +96,11 @@ const loadHomePage = (req, res) => {
   res.sendFile(path.join(__dirname, '../views', 'home.html'));
 };
 
+const logout = (req, res) => {
+  res.clearCookie('userToken');
+  res.redirect('/userLogin');
+};
+
 module.exports = {
   createUser,
   authenticate,
@@ -101,4 +108,5 @@ module.exports = {
   getRegisterPage,
   getLoginPage,
   loadHomePage,
+  logout,
 };

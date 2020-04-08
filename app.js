@@ -16,7 +16,7 @@ app.use(express.static(`${__dirname}/public`));
 app.use(cookieParser());
 
 app.get('/', (req, res) => {
-    res.sendFile(path.join(__dirname, '/views', 'index.html'));
+  res.sendFile(path.join(__dirname, '/views', 'index.html'));
 });
 
 app.get('/userRegister', userController.getRegisterPage);
@@ -26,6 +26,8 @@ app.get('/userLogin', userController.getLoginPage);
 app.post('/userRegister', userController.createUser);
 
 app.post('/userLogin', userController.verifyUser);
+
+app.get('/logout', userController.logout);
 
 app.use(userController.authenticate);
 
