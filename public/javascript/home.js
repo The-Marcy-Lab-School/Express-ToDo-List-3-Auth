@@ -65,7 +65,7 @@ window.addEventListener('load', async() => {
           <button onclick="deleteTask(${task.id})">Delete</button>
         </td>
         <td class="buttons">
-          <button onclick="completeTask(${task.id})">Complete</button>"
+          <button onclick="completeTask(${task.id})">Complete</button>
         </td>
       </tr>
     `;
