@@ -27,8 +27,8 @@ const register = (req, res) => {
 
 const login = async (req, res) => {
   const {email, password} = req.body
-  const user = User.getByEmail(email)
-  
+  const user = await User.getByEmail(email)
+  console.log(user)
   if (!user) {
      return res.status(401).send('Invalid Email')
   }
