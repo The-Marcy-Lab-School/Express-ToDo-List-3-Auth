@@ -2,6 +2,7 @@ const express = require('express')
 const listController = require('../controllers/to-do-query')
 const userController = require('../controllers/user-controller')
 const toDoList = require('../models/to-do-list')
+const User = require('../models/user')
 const router = express.Router()
 const pool = require('../../db')
 const authenticate = require('../auth/verify') 
@@ -17,6 +18,7 @@ router.post('/add-task', authenticate, toDoList.addTask)
 router.delete('/delete-task/:id', authenticate, toDoList.deleteTask)
 router.post('/update-task/:id', authenticate, toDoList.updateTask)
 router.put('/complete-task/:id', authenticate, toDoList.completeTask)
+router.get('user/:email', User.getByEmail)
 
 //Client side paths
 router.get('/', (req, res) =>{

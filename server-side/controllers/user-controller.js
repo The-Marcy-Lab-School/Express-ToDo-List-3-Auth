@@ -3,7 +3,7 @@ const jwt = require('jsonwebtoken')
 const bcrypt = require('bcrypt')
 const User = require('../models/user')
 const path = require('path')
-const db = require('../../db')
+const fetch = require('node-fetch')
 
 
 const register = (req, res) => {
@@ -26,13 +26,9 @@ const register = (req, res) => {
 }
 
 const login = async (req, res, next) => {
+  
   const {email, password} = req.body
-  //const user = await User.getByEmail(res, email)
-  const queryText = 'SELECT * FROM users WHERE email=$1'
-  const client = await db.connect()
-  const result = await client.query(queryText, [email])
-  const user = { 'user': (result) ? result.rows : null }
-  client.release()
+  const user = await fetch(`/user/${email}`)
   
   if (!user) {
     return res.status(401).send('Invalid Email')

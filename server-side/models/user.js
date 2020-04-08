@@ -7,14 +7,16 @@ async function addUser(first_name, last_name, email, hashedPassword) {
   return db.query(queryText, [first_name, last_name, email, hashedPassword])
 }
 
-async function getByEmail(res, email) {
+async function getByEmail(req, res) {
   try{
+    const {email} = req.params
     const queryText = 'SELECT * FROM users WHERE email=$1'
     const client = await db.connect()
     const result = await client.query(queryText, [email])
     const results = { 'results': (result) ? result.rows : null }
     client.release()
-    return results
+    res.send(results)
+
     
   }
   catch (err) {
