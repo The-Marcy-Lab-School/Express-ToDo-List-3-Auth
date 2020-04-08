@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
   const user = await fetch(`https://shielded-lowlands-62326.herokuapp.com/user/${email}`)
   
   if (!user[0]) {
-    return res.status(401).send('Invalid Email')
+    return res.status(401).send(user[0])
   }
   const isValidPassword = await bcrypt.compare(password, user[0].hashed_password)
   
