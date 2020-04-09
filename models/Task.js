@@ -15,18 +15,19 @@ class Task {
       taskDescription,
       dateCreated,
       dueDate,
-      isComplete,
+      false,
       userId,
     ]);
   }
 
   static getAllTasks(userId) {
-    return db.query('SELECT * FROM task;', [userId]);
+    return db.query('SELECT * FROM task WHERE user_id = $1;', [userId]);
   }
 
   static getTaskById(userId, id) {
     const queryText = 'SELECT * FROM task WHERE user_id = $1 AND id = $2;';
-    return db.query(queryText, [userId, id])
+    return db
+      .query(queryText, [userId, id])
       .then((res) => res.rows[0])
       .catch((err) => {
         console.log(err);
@@ -35,7 +36,8 @@ class Task {
 
   static getLastCreated(id) {
     const queryText = 'SELECT * FROM task ORDER BY id DESC LIMIT 1;';
-    return db.query(queryText, [id])
+    return db
+      .query(queryText, [id])
       .then((res) => res.rows[0])
       .catch((err) => {
         console.log(err);

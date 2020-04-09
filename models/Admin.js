@@ -12,8 +12,6 @@ class Admin {
     return db.query(queryText, [email])
       .then((data) => data.rows[0]);
   }
-
-
 }
 
 module.exports = Admin;

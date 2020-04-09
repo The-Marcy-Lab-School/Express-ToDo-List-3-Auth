@@ -47,9 +47,10 @@ const login = async (req, res) => {
         },
         privateKey,
         (err, payload) => {
-          res.cookie('useToken', payload, { httpOnly: true });
+          res.cookie('userToken', payload, { httpOnly: true });
           res.redirect('/tasks');
-        });
+        },
+      );
     }
     return res.status(403).send('Email or password is incorrect.');
   } catch (err) {
