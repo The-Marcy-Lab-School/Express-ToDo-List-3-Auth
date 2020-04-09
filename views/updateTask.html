@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="/style.css" type="text/css" />
+    <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+    <title>Update Task</title>
+</head>
+
+<body>
+  <header>
+      <h1>To-Do List App</h1>
+      <nav>
+          <ul>
+              <li>
+                  <a href="/addTask">Create A Task</a>
+              </li>
+              <li>
+                  <a href="/">View To-Do List</a>
+              </li>
+          </ul>
+      </nav>
+
+  </header>  
+
+        <main>
+            <h1>Update a Task</h1>
+            <form action="/update/<%=tasks.id%>" method="post">
+                <fieldset>
+                    <label for="title">New Task Title</label>
+                    <input id="title" type="text" name="title" value="<% tasks.title %>">
+
+                    <label for="description">New Task Description</label>
+                    <textarea name="description" id="description"> <% tasks.description %></textarea>
+
+                    <input type="submit" value="Update Task" />
+                </fieldset>
+            </form>
+
+
+        </main>
+
+</body>
+
+</html>

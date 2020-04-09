@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/style.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+  <title>To-Do List</title>
+</head>
+
+<body>
+  <header>
+    <h1>To-Do List App</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="/logout">Log Out</a>
+        </li>
+
+        <li>
+          <a href="/addTask">Create a new Task</a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+    <table>
+    <thead>
+      <tr>
+        <th>Task</th>
+        <th>Description</th>
+        <th>Due Date</th>
+        <th>Completed</th>
+      </tr>
+    </thead>
+    <tbody id="taskTableBody">
+
+    </tbody>
+  </table>
+  </main>
+
+  <script src="javascript/todo.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

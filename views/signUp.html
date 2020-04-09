@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header>
+        <h1>To-Do List App Sign Up</h1>
+        <nav>
+            <ul>
+                <li>
+                    <a href="/addTask">Create A Task</a>
+                </li>
+                <li>
+                    <a href="/">View To-Do List</a>
+                </li>
+            </ul>
+        </nav>
+
+    </header>
+    <main>
+        <h1>Sign Up</h1>
+        <form action="/addUser" method="post">
+            <fieldset>
+                <label for="username">Username</label>
+                <input id="username" type="text" name="Username">
+
+                <label for="email">Email</label>
+                <input id="email" type="text" name="email">
+
+                <label for="password">Password</label>
+                <input id="password" type="text" name="password">
+
+                <input type="submit" value="Sign Up" />
+            </fieldset>
+        </form>
+
+
+    </main>
+
+
+    <script src="javascript/signUp.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
