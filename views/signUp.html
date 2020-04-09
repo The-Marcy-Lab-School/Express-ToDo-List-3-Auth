@@ -6,31 +6,29 @@
   </head>
   <body>
     <header>
-        <h1>To-Do List App Sign Up</h1>
-        <nav>
-            <ul>
-                <li>
-                    <a href="/addTask">Create A Task</a>
-                </li>
-                <li>
-                    <a href="/">View To-Do List</a>
-                </li>
-            </ul>
-        </nav>
-
+      <h1>To-Do List App</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/login">Already have an account? Login here.</a>
+          </li>
+        </ul>
+      </nav>
     </header>
+
     <main>
         <h1>Sign Up</h1>
-        <form action="/addUser" method="post">
+        <h2 id="errorText"><h2>
+        <form id="signUpForm" action="/signup" method="post">
             <fieldset>
                 <label for="username">Username</label>
                 <input id="username" type="text" name="Username">
 
                 <label for="email">Email</label>
-                <input id="email" type="text" name="email">
+                <input id="email" type="email" name="email">
 
                 <label for="password">Password</label>
-                <input id="password" type="text" name="password">
+                <input id="password" type="password" name="password">
 
                 <input type="submit" value="Sign Up" />
             </fieldset>

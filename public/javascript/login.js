@@ -1,27 +1,25 @@
-const signUpform = document.getElementById('signUpForm');
+const loginForm = document.getElementById('loginForm');
 
-signUpForm.addEventListner('submit', e => {
+loginForm.addEventListner('submit', e => {
   e.preventDefault();
 
-  const username = signUpForm.username.value;
-  const email = signUpForm.email.value;
-  const password = signUpForm.password.value;
+  const email = loginForm.email.value;
+  const password = loginForm.password.value;
 
   const errorText = document.getElementById('errorText');
-  fetch('/signup', {
+  fetch('/login', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      username,
       email,
       password,
     }),
   })
     .then(res => {
       if (res.status === 201) {
-        window.location.replace('/login');
+        window.location.replace('/todo.html');
       }
     })
     .catch(err => {

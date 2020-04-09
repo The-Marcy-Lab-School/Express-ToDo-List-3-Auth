@@ -47,17 +47,11 @@ const login = async (req, res) => {
         },
         privateKey,
         (err, payload) => {
-          if (err) {
-            throw new Error();
-          }
-          res
-            .cookie('useToken', payload, { httpOnly: true })
-            .status(200)
-            .json({ success: 'Authorized' });
-        },
-      );
+          res.cookie('useToken', payload, { httpOnly: true });
+          res.redirect('/tasks');
+        });
     }
-    return res.status(403).send('Password is not valid.');
+    return res.status(403).send('Email or password is incorrect.');
   } catch (err) {
     console.log(err);
     return res.send(err);

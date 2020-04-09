@@ -1,9 +1,9 @@
-window.onload = async event => {
+window.onload = async () => {
   const response = await fetch('/tasks', { method: 'GET' });
   const data = await response.json();
   const taskTable = document.getElementById('taskTableBody');
 
-  return data.forEach(task => {
+  return data.forEach((task) => {
     taskTable.innerHTML += `
       <tr>
           <td id="name" class="title">${task.task_name}</td>
@@ -24,5 +24,4 @@ window.onload = async event => {
         </tr>
       `;
   });
-
 };
