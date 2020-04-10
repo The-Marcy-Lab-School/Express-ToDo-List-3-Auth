@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:300,300italic,700,700italic">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/normalize/5.0.0/normalize.css">
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/milligram/1.3.0/milligram.css">
+  <title>New Task</title>
+</head>
+<body>
+  <center>
+    <h1>Create Task</h1>
+  </center>
+  
+  <div class="container">
+    <form action="/createTask" method="post">
+      <fieldset>
+        <label for="title">Title:</label>
+        <input type="text" name="title" id="title">
+        
+        <label for="dateDue">Do By: </label>
+        <input type="date" name="dateDue" id="dateDue">
+        
+        <label for="description">Description:</label>
+        <textarea name="description" id="description"></textarea>
+            
+        <input class="button-primary" type="submit" value="Add Task">
+      </fieldset>
+    </form>
+  </div>
+</body>
+</html>
