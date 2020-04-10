@@ -1,3 +1,5 @@
+console.log('my javascript is connected');
+
 const deleteTask = async(taskId) => {
   await fetch(`/tasks/${taskId}`, { method: 'DELETE' });
   window.location.reload();

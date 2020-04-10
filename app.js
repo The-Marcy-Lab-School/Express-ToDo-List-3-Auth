@@ -13,6 +13,7 @@ const tasksController = require('./controllers/task');
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(express.static('public'));
 
 // render home page
 app.get('/', (req, res) => {

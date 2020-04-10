@@ -1,7 +1,8 @@
 const { Pool } = require('pg');
+const localConnect = 'postgresql://postgres@localhost:5432/to_do';
 
 const pool = new Pool({
-  connectionString: process.env.DATABASE_URL,
+  connectionString: process.env.DATABASE_URL || localConnect,
 });
 
 
