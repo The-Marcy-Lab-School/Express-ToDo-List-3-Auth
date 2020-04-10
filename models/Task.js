@@ -6,7 +6,7 @@ class Task {
   }
 
   static createTask(userId, dateDue, title, description) {
-    const queryText = 'INSERT INTO tasks (user_id, date_due, completed, title, description) VALUES ($1, $2, $3, $4, $5, $6);';
+    const queryText = 'INSERT INTO tasks (user_id, date_due, completed, title, description) VALUES ($1, $2, $3, $4, $5);';
     return db.query(queryText, [userId, dateDue, false, title, description]);
   }
 

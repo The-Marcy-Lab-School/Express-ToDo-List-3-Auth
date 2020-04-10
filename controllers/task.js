@@ -20,9 +20,9 @@ const createTask = (req, res) => {
   const { userToken } = req.cookies;
   const payload= jwt.decode(userToken);
   const { id } = payload;
-  const { dateCreated, dateDue, title, description } = req.body;
+  const { dateDue, title, description } = req.body;
 
-  Task.createTask(id, dateCreated, dateDue, title, description)
+  Task.createTask(id, dateDue, title, description)
     .then(() => Task.getLastCreated())
     .then((user) => res.status(201).json(user.rows[0]))
     .catch((err) => {
