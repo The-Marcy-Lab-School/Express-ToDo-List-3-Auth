@@ -1,5 +1,4 @@
-# Unit 7 Problem Set #4
-## Full Stack To-Do w/ Authentication
+# Full Stack To-Do-List w/ Authentication
 
 ## Project Overview
 The purpose of this Problem Set is to merge your work from you two previous To Do List labs. You will rebuild an MVC To-Do list using the RESTful API that you created. Instead of sending rendered templates in response to an incoming request, you will make AJAX requests to your backend, handle JSON responses, and render to-do's to the DOM.
