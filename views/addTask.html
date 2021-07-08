@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <link rel="stylesheet" href="/style.css" type="text/css" />
+  <link href="https://fonts.googleapis.com/css?family=Merriweather&display=swap" rel="stylesheet">
+  <title>Add Task</title>
+</head>
+
+<body>
+  <header>
+    <h1>To-Do List App</h1>
+    <nav>
+      <ul>
+        <li>
+          <a href="/addTask">Create A Task</a>
+        </li>
+        <li>
+          <a href="/">View To-Do List</a>
+        </li>
+      </ul>
+    </nav>
+
+  </header>
+  <main>
+    <h1>Add a Task</h1>
+    <form id="addTaskForm" action="/addTask" method="post">
+      <fieldset>
+        <label for="title">Task Title</label>
+        <input id="title" type="text" name="title">
+
+        <label for="description">Task Description</label>
+        <textarea name="description" id="description"></textarea>
+
+        <label for="date">Due Date</label>
+        <input type='datetime-local' id='dueDate' name='dueDate' />
+
+        <input type="submit" value="Add Task" />
+      </fieldset>
+    </form>
+
+
+  </main>
+
+  <script src="javascript/todo.js" type="text/javascript" charset="utf-8"></script>
+</body>
+
+</html>

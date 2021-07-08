@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <header>
+      <h1>To-Do List App</h1>
+      <nav>
+        <ul>
+          <li>
+            <a href="/signUp">Don't have an account? Sign up here.</a>
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main>
+        <h1>Log Into Your Account</h1>
+        <h2 id="errorText"><h2>
+
+        <form id="loginForm" action="/login" method="post">
+            <fieldset>
+              <label for="email">Email</label>
+              <input id="email" type="email" name="email">
+
+                <label for="password">Password</label>
+                <input id="password" type="text" name="password">
+
+                <input type="submit" value="Login" />
+            </fieldset>
+        </form>
+    </main>
+
+<script src="javascript/login.js" type="text/javascript" charset="utf-8"></script>
+  </body>
+</html>
